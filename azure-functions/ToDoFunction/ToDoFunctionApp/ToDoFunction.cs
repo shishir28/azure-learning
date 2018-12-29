@@ -5,8 +5,6 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Microsoft.Azure.WebJobs.Host;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -21,6 +19,8 @@ namespace ToDoFunctionApp
         public static async Task<IActionResult> CreateTodo(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "todo")] HttpRequest req,
             [Table("todos", Connection = "AzureWebJobsStorage")] IAsyncCollector<ToDoTableEntity> todoTable,
+            [Queue("todos", Connection = "AzureWebJobsStorage")] IAsyncCollector<ToDo> todoQueue,
+
             ILogger log)
         {
             log.LogInformation("Creating a new Todo");
@@ -28,6 +28,7 @@ namespace ToDoFunctionApp
             var input = JsonConvert.DeserializeObject<ToDoCreateModel>(requestBody);
             var todo = new ToDo() { TaskDescription = input.TaskDescription };
             await todoTable.AddAsync(todo.ToTableEntity());
+            await todoQueue.AddAsync(todo);
             return new OkObjectResult(todo);
         }
 
