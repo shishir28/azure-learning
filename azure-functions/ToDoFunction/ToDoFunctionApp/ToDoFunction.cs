@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Microsoft.Azure.WebJobs.Host;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace ToDoFunctionApp
 {
@@ -18,9 +19,9 @@ namespace ToDoFunctionApp
         [FunctionName("CreateTodo")]
         public static async Task<IActionResult> CreateTodo(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "todo")] HttpRequest req,
-            TraceWriter log)
+            ILogger log)
         {
-            log.Info("Creating a new Todo");
+            log.LogInformation("Creating a new Todo");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<ToDoCreateModel>(requestBody);
@@ -33,18 +34,18 @@ namespace ToDoFunctionApp
         [FunctionName("GetTodos")]
         public static IActionResult GetTodos(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo")] HttpRequest req,
-            TraceWriter log)
+            ILogger log)
         {
-            log.Info("Getting a list of Todos");
+            log.LogInformation("Getting a list of Todos");
             return new OkObjectResult(items);
         }
 
         [FunctionName("GetTodoById")]
         public static IActionResult GetTodoById(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo/{id}")] HttpRequest req,
-            TraceWriter log, string id)
+            ILogger log, string id)
         {
-            log.Info("Getting Todo with matching id");
+            log.LogInformation("Getting Todo with matching id");
             var item = items.FirstOrDefault(x => x.Id == id);
 
             if (item == null)
@@ -57,9 +58,9 @@ namespace ToDoFunctionApp
         [FunctionName("UpdateTodo")]
         public static async Task<IActionResult> UpdateTodo(
             [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "todo/{id}")] HttpRequest req,
-            TraceWriter log, string id)
+            ILogger log, string id)
         {
-            log.Info("Updating existing Todo");
+            log.LogInformation("Updating existing Todo");
 
             var item = items.FirstOrDefault(x => x.Id == id);
 
@@ -80,9 +81,9 @@ namespace ToDoFunctionApp
         [FunctionName("DeleteTodo")]
         public static IActionResult DeleteTodo(
            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "todo/{id}")] HttpRequest req,
-           TraceWriter log, string id)
+           ILogger log, string id)
         {
-            log.Info("Deleting existing Todo");
+            log.LogInformation("Deleting existing Todo");
 
             var item = items.FirstOrDefault(x => x.Id == id);
 
