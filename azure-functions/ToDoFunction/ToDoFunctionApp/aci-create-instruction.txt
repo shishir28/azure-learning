@@ -1,0 +1,7 @@
+﻿# Deploying as ACI 
+# Step 1(store connectionstring)  $connStr = az storage account show-connection-string --name  STORAGEACCOUNTNAME --resource-group RESOURCEGROUPNAME -o tsv
+# Step 2(build docker image)  docker build -t serverlessfuncs:v1 .
+# Step 3(tag for docker hub)  docker tag serverlessfuncs:v1 shishir28/serverlessfuncs:v1
+# Step 4( push to docker hub) docker push shishir28/serverlessfuncs:v1
+# Step 5  az container create -n serverless-funcs-1 -g RESOURCEGROUPNAME --image shishir28/serverlessfuncs:v1 --ip-address public --ports 80 --dns-name-label DNSNAME -e AzureWebJobsStorage=$connStr
+
