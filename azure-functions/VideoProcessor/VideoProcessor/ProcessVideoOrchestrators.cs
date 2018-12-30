@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using System;
 
 namespace VideoProcessor
 {
@@ -16,26 +17,51 @@ namespace VideoProcessor
             if (!ctx.IsReplaying)
                 log.LogInformation("Calling Transcoding activity");
 
-            var transcodedLocation = await ctx.CallActivityAsync<string>("A_TranscodeVideo", videoLocation);
-
-
-            if (!ctx.IsReplaying)
-                log.LogInformation("Calling Thumbnail Extraction activity");
-
-            var thumbnailLocation = await ctx.CallActivityAsync<string>("A_ExtractThumbnail", transcodedLocation);
-
-            if (!ctx.IsReplaying)
-                log.LogInformation("Calling Prepending Intro Video  generation activity");
-
-
-            var withIntroductionLocation = await ctx.CallActivityAsync<string>("A_PrependIntro", transcodedLocation);
-
-            return new
+            string transcodedLocation = null;
+            string thumbnailLocation = null;
+            string withIntroductionLocation = null;
+            try
             {
-                Transcoded = transcodedLocation,
-                Thumbnail = thumbnailLocation,
-                WithIntro = withIntroductionLocation
-            };
+                transcodedLocation = await ctx.CallActivityAsync<string>("A_TranscodeVideo", videoLocation);
+
+
+                if (!ctx.IsReplaying)
+                    log.LogInformation("Calling Thumbnail Extraction activity");
+
+                thumbnailLocation = await ctx.CallActivityAsync<string>("A_ExtractThumbnail", transcodedLocation);
+
+                if (!ctx.IsReplaying)
+                    log.LogInformation("Calling Prepending Intro Video  generation activity");
+
+
+                withIntroductionLocation = await ctx.CallActivityAsync<string>("A_PrependIntro", transcodedLocation);
+
+                return new
+                {
+                    Transcoded = transcodedLocation,
+                    Thumbnail = thumbnailLocation,
+                    WithIntro = withIntroductionLocation
+                };
+
+            }
+            catch (Exception ex)
+            {
+                if (!ctx.IsReplaying)
+                    log.LogInformation($"Caught an error from activity {ex.Message}");
+
+                await ctx.CallActivityAsync<string>("A_Cleanup",
+                   new[]{ transcodedLocation,
+                     thumbnailLocation,
+                     withIntroductionLocation }
+                    );
+                return new
+                {
+                    Error = "Failed to process upload video",
+                    Message = ex.Message
+                };
+            }
+
+
 
         }
     }

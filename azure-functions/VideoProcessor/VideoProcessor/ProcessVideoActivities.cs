@@ -1,7 +1,8 @@
 ﻿using Microsoft.Azure.WebJobs;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-
+using System.IO;
+using System;
 
 namespace VideoProcessor
 {
@@ -16,7 +17,7 @@ namespace VideoProcessor
             // simulate doing the activity
             await Task.Delay(5000);
 
-            return "transcoded.mp4";
+            return  $"{Path.GetFileNameWithoutExtension(inputVideo)}-transcoded.mp4";
         }
 
 
@@ -26,6 +27,10 @@ namespace VideoProcessor
            ILogger log)
         {
             log.LogInformation($"Extracting Thumbnail {inputVideo}");
+
+            if (inputVideo.Contains("error"))
+                throw new InvalidOperationException("could not extract thumbnail");
+
             // simulate doing the activity
             await Task.Delay(5000);
 
@@ -42,6 +47,21 @@ namespace VideoProcessor
             await Task.Delay(5000);
 
             return "withIntro.mp4";
+        }
+
+        [FunctionName("A_Cleanup")]
+        public static async Task<string> Cleanup(
+        [ActivityTrigger] string[] filesToCleanup,
+        ILogger log)
+        {
+            foreach (var file in filesToCleanup)
+            {
+
+                log.LogInformation($"Deleting {file}");
+                // simulate doing the activity
+                await Task.Delay(5000);
+            }
+            return "Cleaned Up Successfully";
         }
 
     }
