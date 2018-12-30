@@ -52,5 +52,21 @@ namespace VideoProcessor
 
             return req.CreateResponse(HttpStatusCode.OK);
         }
+
+
+        [FunctionName("StartPeriodTask")]
+        public static async Task<HttpResponseMessage> StartPeriodTask(
+          [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]
+           HttpRequestMessage req,
+          [OrchestrationClient] DurableOrchestrationClient client,
+          ILogger log)
+        {
+            // nb if the approval code doesn't exist, framework just returns a 404 before we get here
+
+            var instanceId = await client.StartNewAsync("O_PeriodicTask", 0);
+            return client.CreateCheckStatusResponse(req, instanceId);
+
+
+        }
     }
 }

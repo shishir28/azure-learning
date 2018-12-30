@@ -79,10 +79,8 @@ namespace VideoProcessor
             log.LogInformation($"Appending Intro to {inputVideo}");
             // simulate doing the activity
             await Task.Delay(5000);
-
             return "withIntro.mp4";
         }
-
 
 
 
@@ -107,6 +105,17 @@ namespace VideoProcessor
             await Task.Delay(1000);
         }
 
+
+        [FunctionName("A_PeriodicActivity")]
+        public static void PeriodicActivity(
+        [ActivityTrigger] int timesRun,
+        ILogger log)
+        {
+            log.LogWarning($"Running the Periodic activity, run {timesRun} times ");
+            // simulate doing the activity
+        }
+
+
         [FunctionName("A_SendApprovalRequestEmail")]
         public static async Task SendApprovalRequestEmail(
            [ActivityTrigger] ApprovalInfo approvalInfo,
@@ -123,7 +132,6 @@ namespace VideoProcessor
 
 
             await approvalTable.AddAsync(approval);
-
 
 
             var approverEmail = new EmailAddress(Environment.GetEnvironmentVariable("ApproverEmail"));

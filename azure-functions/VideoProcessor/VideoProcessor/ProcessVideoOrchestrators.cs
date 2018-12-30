@@ -25,7 +25,6 @@ namespace VideoProcessor
             string withIntroductionLocation = null;
             string approvalResult = "Unknown";
 
-
             try
             {
 
@@ -56,25 +55,24 @@ namespace VideoProcessor
                 {
                     var timeout = ctx.CurrentUtcDateTime.AddMinutes(3);
                     var timeoutTask = ctx.CreateTimer(timeout, cts.Token);
-                    var approvalTask =  ctx.WaitForExternalEvent<string>("ApprovalResult");
+                    var approvalTask = ctx.WaitForExternalEvent<string>("ApprovalResult");
                     var winner = await Task.WhenAny(approvalTask, timeoutTask);
                     if (winner == approvalTask)
                     {
                         approvalResult = approvalTask.Result;
                         cts.Cancel();
                         if (!ctx.IsReplaying)
-                            log.LogInformation("********* approvalTask was winner");
-
-                    } 
+                            log.LogInformation("ApprovalTask was winner");
+                    }
                     else
                     {
                         if (!ctx.IsReplaying)
-                            log.LogInformation("============= timeout was winner");
+                            log.LogInformation("Timeout was winner");
 
                         approvalResult = "Timed Out";
                     }
                 }
-               
+
 
                 if (approvalResult == "Approved")
                     await ctx.CallActivityAsync("A_PublishVideo", withIntroductionLocation);
@@ -133,6 +131,24 @@ namespace VideoProcessor
 
             var transCodeResult = await Task.WhenAll(transcodeTasks);
             return transCodeResult;
+        }
+
+        [FunctionName("O_PeriodicTask")]
+        public static async Task<int> PeriodicTask(
+          [OrchestrationTrigger] DurableOrchestrationContext ctx,
+          ILogger log)
+        {
+       
+            var timesRun = ctx.GetInput<int>();
+            timesRun++;
+            if (!ctx.IsReplaying)
+                log.LogInformation($"Starting the PeriodicTask activity {ctx.InstanceId}, {timesRun}");
+            await ctx.CallActivityAsync("A_PeriodicActivity", timesRun);
+            var nextRun = ctx.CurrentUtcDateTime.AddSeconds(30);
+            await ctx.CreateTimer(nextRun, CancellationToken.None);
+            ctx.ContinueAsNew(timesRun);
+            return timesRun;
+
         }
     }
 }
