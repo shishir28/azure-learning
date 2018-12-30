@@ -43,7 +43,13 @@ namespace VideoProcessor
 
                 withIntroductionLocation = await ctx.CallActivityAsync<string>("A_PrependIntro", transcodedLocation);
 
-                await ctx.CallActivityAsync<string>("A_SendApprovalRequestEmail", withIntroductionLocation);
+                await ctx.CallActivityAsync("A_SendApprovalRequestEmail", new ApprovalInfo()
+                {
+                    OrchestrationId = ctx.InstanceId,
+                    VideoLocation = withIntroductionLocation
+                });
+
+
                 approvalResult = await ctx.WaitForExternalEvent<string>("ApprovalResult");
 
                 if (approvalResult == "Approved")

@@ -4,6 +4,16 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using System;
 using System.Linq;
+using SendGrid.Helpers.Mail;
+using System.Collections.Generic;
+using Microsoft.WindowsAzure.Storage.Table;
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Microsoft.WindowsAzure.Storage;
 
 namespace VideoProcessor
 {
@@ -73,15 +83,7 @@ namespace VideoProcessor
             return "withIntro.mp4";
         }
 
-        [FunctionName("A_SendApprovalRequestEmail")]
-        public static async Task SendApprovalRequestEmail(
-         [ActivityTrigger] string inputVideo,
-         ILogger log)
-        {
-            log.LogInformation($"Requesting approval for {inputVideo}");
-            // simulate doing the activity
-            await Task.Delay(5000);
-        }
+
 
 
         [FunctionName("A_PublishVideo")]
@@ -103,6 +105,51 @@ namespace VideoProcessor
             log.LogInformation($"Rejecting {inputVideo}");
             // simulate doing the activity
             await Task.Delay(1000);
+        }
+
+        [FunctionName("A_SendApprovalRequestEmail")]
+        public static async Task SendApprovalRequestEmail(
+           [ActivityTrigger] ApprovalInfo approvalInfo,
+           [Table("Approvals", Connection = "AzureWebJobsStorage")] IAsyncCollector<ApprovalTableEntity> approvalTable,
+           ILogger log)
+        {
+            var approvalCode = Guid.NewGuid().ToString("N");
+            var approval = new ApprovalTableEntity
+            {
+                PartitionKey = "Approval",
+                RowKey = approvalCode,
+                OrchestrationId = approvalInfo.OrchestrationId
+            };
+
+
+            await approvalTable.AddAsync(approval);
+
+
+
+            var approverEmail = new EmailAddress(Environment.GetEnvironmentVariable("ApproverEmail"));
+            var senderEmail = new EmailAddress(Environment.GetEnvironmentVariable("SenderEmail"));
+            var host = new EmailAddress(Environment.GetEnvironmentVariable("Host"));
+            var sendGridKey = Environment.GetEnvironmentVariable("SendGridKey");
+
+
+            var subject = "A video is awaiting approval";
+
+            log.LogInformation($"Sending approval request for {approvalInfo.VideoLocation}");
+
+            var functionAddress = $"{host}/api/SubmitVideoApproval/{approvalCode}";
+            var approvedLink = functionAddress + "?result=Approved";
+            var rejectedLink = functionAddress + "?result=Rejected";
+            var body = $"Please review {approvalInfo.VideoLocation}<br>"
+                               + $"<a href=\"{approvedLink}\">Approve</a><br>"
+                               + $"<a href=\"{rejectedLink}\">Reject</a>";
+            var contents = new List<Content> { new Content("text/html", body) };
+
+            var message = new SendGridMessage { From = senderEmail, ReplyTo = approverEmail, Subject = subject, Contents = contents };
+
+            var emailClient = new SendGrid.SendGridClient(sendGridKey);
+            await emailClient.SendEmailAsync(message);
+
+            log.LogInformation(body);
         }
 
         [FunctionName("A_Cleanup")]
