@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+
 namespace VideoProcessor
 {
     public static class ProcessVideoOrchestrators
@@ -50,7 +52,29 @@ namespace VideoProcessor
                 });
 
 
-                approvalResult = await ctx.WaitForExternalEvent<string>("ApprovalResult");
+                using (var cts = new CancellationTokenSource())
+                {
+                    var timeout = ctx.CurrentUtcDateTime.AddMinutes(3);
+                    var timeoutTask = ctx.CreateTimer(timeout, cts.Token);
+                    var approvalTask =  ctx.WaitForExternalEvent<string>("ApprovalResult");
+                    var winner = await Task.WhenAny(approvalTask, timeoutTask);
+                    if (winner == approvalTask)
+                    {
+                        approvalResult = approvalTask.Result;
+                        cts.Cancel();
+                        if (!ctx.IsReplaying)
+                            log.LogInformation("********* approvalTask was winner");
+
+                    } 
+                    else
+                    {
+                        if (!ctx.IsReplaying)
+                            log.LogInformation("============= timeout was winner");
+
+                        approvalResult = "Timed Out";
+                    }
+                }
+               
 
                 if (approvalResult == "Approved")
                     await ctx.CallActivityAsync("A_PublishVideo", withIntroductionLocation);
