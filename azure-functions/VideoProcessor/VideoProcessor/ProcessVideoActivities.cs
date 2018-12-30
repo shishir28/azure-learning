@@ -73,6 +73,38 @@ namespace VideoProcessor
             return "withIntro.mp4";
         }
 
+        [FunctionName("A_SendApprovalRequestEmail")]
+        public static async Task SendApprovalRequestEmail(
+         [ActivityTrigger] string inputVideo,
+         ILogger log)
+        {
+            log.LogInformation($"Requesting approval for {inputVideo}");
+            // simulate doing the activity
+            await Task.Delay(5000);
+        }
+
+
+        [FunctionName("A_PublishVideo")]
+        public static async Task PublishVideo(
+         [ActivityTrigger] string inputVideo,
+         ILogger log)
+        {
+            log.LogInformation($"Publishing {inputVideo}");
+            // simulate doing the activity
+            await Task.Delay(1000);
+        }
+
+
+        [FunctionName("A_RejectVideo")]
+        public static async Task RejectVideo(
+        [ActivityTrigger] string inputVideo,
+        ILogger log)
+        {
+            log.LogInformation($"Rejecting {inputVideo}");
+            // simulate doing the activity
+            await Task.Delay(1000);
+        }
+
         [FunctionName("A_Cleanup")]
         public static async Task<string> Cleanup(
         [ActivityTrigger] string[] filesToCleanup,

@@ -21,27 +21,13 @@ namespace VideoProcessor
             string transcodedLocation = null;
             string thumbnailLocation = null;
             string withIntroductionLocation = null;
+            string approvalResult = "Unknown";
 
 
             try
             {
 
-                if (!ctx.IsReplaying)
-                    log.LogInformation("Calling  A_GetTranscodeBitrates activity");
-
-                var bitRates = await ctx.CallActivityAsync<int[]>("A_GetTranscodeBitrates", null);
-
-
-                var transcodeTasks = new List<Task<VideoFileInfo>>();
-
-                foreach (var bitRate in bitRates)
-                {
-                    var fileInfo = new VideoFileInfo() { BitRate = bitRate, Location = videoLocation };
-                    var task = ctx.CallActivityAsync<VideoFileInfo>("A_TranscodeVideo", fileInfo);
-                    transcodeTasks.Add(task);
-                }
-
-                var transCodeResult = await Task.WhenAll(transcodeTasks);
+                var transCodeResult = await ctx.CallSubOrchestratorAsync<VideoFileInfo[]>("O_TranscodeVideo", videoLocation);
 
                 transcodedLocation = transCodeResult.OrderByDescending(x => x.BitRate).Select(y => y.Location).FirstOrDefault();
 
@@ -57,11 +43,20 @@ namespace VideoProcessor
 
                 withIntroductionLocation = await ctx.CallActivityAsync<string>("A_PrependIntro", transcodedLocation);
 
+                await ctx.CallActivityAsync<string>("A_SendApprovalRequestEmail", withIntroductionLocation);
+                approvalResult = await ctx.WaitForExternalEvent<string>("ApprovalResult");
+
+                if (approvalResult == "Approved")
+                    await ctx.CallActivityAsync("A_PublishVideo", withIntroductionLocation);
+                else
+                    await ctx.CallActivityAsync("A_RejectVideo", withIntroductionLocation);
+
                 return new
                 {
                     Transcoded = transcodedLocation,
                     Thumbnail = thumbnailLocation,
-                    WithIntro = withIntroductionLocation
+                    WithIntro = withIntroductionLocation,
+                    ApprovalResult = approvalResult
                 };
 
             }
@@ -81,6 +76,33 @@ namespace VideoProcessor
                 };
             }
 
+        }
+
+        [FunctionName("O_TranscodeVideo")]
+        public static async Task<VideoFileInfo[]> TranscodeVideo(
+           [OrchestrationTrigger] DurableOrchestrationContext ctx,
+           ILogger log)
+        {
+            var videoLocation = ctx.GetInput<string>();
+
+
+            if (!ctx.IsReplaying)
+                log.LogInformation("Calling  A_GetTranscodeBitrates activity");
+
+            var bitRates = await ctx.CallActivityAsync<int[]>("A_GetTranscodeBitrates", null);
+
+
+            var transcodeTasks = new List<Task<VideoFileInfo>>();
+
+            foreach (var bitRate in bitRates)
+            {
+                var fileInfo = new VideoFileInfo() { BitRate = bitRate, Location = videoLocation };
+                var task = ctx.CallActivityAsync<VideoFileInfo>("A_TranscodeVideo", fileInfo);
+                transcodeTasks.Add(task);
+            }
+
+            var transCodeResult = await Task.WhenAll(transcodeTasks);
+            return transCodeResult;
         }
     }
 }
