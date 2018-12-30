@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace VideoProcessor
 {
     public static class ProcessVideoOrchestrators
@@ -20,9 +21,29 @@ namespace VideoProcessor
             string transcodedLocation = null;
             string thumbnailLocation = null;
             string withIntroductionLocation = null;
+
+
             try
             {
-                transcodedLocation = await ctx.CallActivityAsync<string>("A_TranscodeVideo", videoLocation);
+
+                if (!ctx.IsReplaying)
+                    log.LogInformation("Calling  A_GetTranscodeBitrates activity");
+
+                var bitRates = await ctx.CallActivityAsync<int[]>("A_GetTranscodeBitrates", null);
+
+
+                var transcodeTasks = new List<Task<VideoFileInfo>>();
+
+                foreach (var bitRate in bitRates)
+                {
+                    var fileInfo = new VideoFileInfo() { BitRate = bitRate, Location = videoLocation };
+                    var task = ctx.CallActivityAsync<VideoFileInfo>("A_TranscodeVideo", fileInfo);
+                    transcodeTasks.Add(task);
+                }
+
+                var transCodeResult = await Task.WhenAll(transcodeTasks);
+
+                transcodedLocation = transCodeResult.OrderByDescending(x => x.BitRate).Select(y => y.Location).FirstOrDefault();
 
 
                 if (!ctx.IsReplaying)
@@ -52,16 +73,13 @@ namespace VideoProcessor
                 await ctx.CallActivityAsync<string>("A_Cleanup",
                    new[]{ transcodedLocation,
                      thumbnailLocation,
-                     withIntroductionLocation }
-                    );
+                     withIntroductionLocation });
                 return new
                 {
                     Error = "Failed to process upload video",
                     Message = ex.Message
                 };
             }
-
-
 
         }
     }
