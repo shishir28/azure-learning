@@ -1,0 +1,278 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "servicebus_1_Connection_Name": {
+      "type": "string",
+      "defaultValue": "servicebus"
+    },
+    "servicebus_1_Connection_DisplayName": {
+      "type": "string",
+      "defaultValue": "WinnerServiceBusConn"
+    },
+    "servicebus_1_connectionString": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Azure Service Bus Connection String"
+      }
+    },
+    "LogicAppLocation": {
+      "type": "string",
+      "minLength": 1,
+      "allowedValues": [
+        "[resourceGroup().location]",
+        "eastasia",
+        "southeastasia",
+        "centralus",
+        "eastus",
+        "eastus2",
+        "westus",
+        "northcentralus",
+        "southcentralus",
+        "northeurope",
+        "westeurope",
+        "japanwest",
+        "japaneast",
+        "brazilsouth",
+        "australiaeast",
+        "australiasoutheast",
+        "southindia",
+        "centralindia",
+        "westindia",
+        "canadacentral",
+        "canadaeast",
+        "uksouth",
+        "ukwest",
+        "westcentralus",
+        "westus2"
+      ],
+      "defaultValue": "australiaeast"
+    },
+    "LogicAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "FindTheWinner"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "properties": {
+        "state": "Enabled",
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "actions": {
+            "BusinessLogic": {
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "triggerName": "manual",
+                  "workflow": {
+                    "id": "/subscriptions/698620ca-735f-40ca-868a-dcd404c443c5/resourceGroups/WBC-M5P/providers/Microsoft.Logic/workflows/BusinessLogic"
+                  }
+                },
+                "body": {
+                  "Message": "@base64ToString(triggerBody()?['ContentData'])",
+                  "SequenceNumber": "@variables('LoopCount')"
+                }
+              },
+              "runAfter": {
+                "Initialize_variable": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Complete_the_message_in_a_queue": {
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['servicebus']['connectionId']"
+                  }
+                },
+                "method": "delete",
+                "path": "/@{encodeURIComponent(encodeURIComponent('bigwinner'))}/messages/complete",
+                "queries": {
+                  "lockToken": "@triggerBody()?['LockToken']",
+                  "queueType": "Main",
+                  "sessionId": "@triggerBody()?['SessionId']"
+                }
+              },
+              "runAfter": {
+                "BusinessLogic": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Initialize_variable": {
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "LoopCount",
+                    "type": "Integer",
+                    "value": 1
+                  }
+                ]
+              },
+              "runAfter": {}
+            },
+            "Until": {
+              "type": "Until",
+              "expression": "@equals(variables('LoopCount'), 5)",
+              "limit": {
+                "count": 60,
+                "timeout": "PT1H"
+              },
+              "actions": {
+                "BusinessLogic_2": {
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "triggerName": "manual",
+                      "workflow": {
+                        "id": "/subscriptions/698620ca-735f-40ca-868a-dcd404c443c5/resourceGroups/WBC-M5P/providers/Microsoft.Logic/workflows/BusinessLogic"
+                      }
+                    },
+                    "body": {
+                      "Message": "@base64ToString(body('When_a_message_is_received_in_a_queue_(peek-lock)_2')?['ContentData'])",
+                      "SequenceNumber": "@variables('LoopCount')"
+                    }
+                  },
+                  "runAfter": {
+                    "Increment_variable": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "Complete_the_message_in_a_queue_2": {
+                  "type": "ApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connection": {
+                        "name": "@parameters('$connections')['servicebus']['connectionId']"
+                      }
+                    },
+                    "method": "delete",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('bigwinner'))}/messages/complete",
+                    "queries": {
+                      "lockToken": "@body('When_a_message_is_received_in_a_queue_(peek-lock)_2')?['LockToken']",
+                      "queueType": "Main",
+                      "sessionId": "@body('When_a_message_is_received_in_a_queue_(peek-lock)_2')?['SessionId']"
+                    }
+                  },
+                  "runAfter": {
+                    "BusinessLogic_2": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "Increment_variable": {
+                  "type": "IncrementVariable",
+                  "inputs": {
+                    "name": "LoopCount",
+                    "value": 1
+                  },
+                  "runAfter": {
+                    "When_a_message_is_received_in_a_queue_(peek-lock)_2": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "When_a_message_is_received_in_a_queue_(peek-lock)_2": {
+                  "type": "ApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connection": {
+                        "name": "@parameters('$connections')['servicebus']['connectionId']"
+                      }
+                    },
+                    "method": "get",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('bigwinner'))}/messages/head/peek",
+                    "queries": {
+                      "queueType": "Main",
+                      "sessionId": "@triggerBody()?['SessionId']"
+                    }
+                  },
+                  "runAfter": {}
+                }
+              },
+              "runAfter": {
+                "Complete_the_message_in_a_queue": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "parameters": {
+            "$connections": {
+              "defaultValue": {},
+              "type": "Object"
+            }
+          },
+          "triggers": {
+            "When_a_message_is_received_in_a_queue_(peek-lock)": {
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['servicebus']['connectionId']"
+                  }
+                },
+                "method": "get",
+                "path": "/@{encodeURIComponent(encodeURIComponent('bigwinner'))}/messages/head/peek",
+                "queries": {
+                  "queueType": "Main",
+                  "sessionId": "Next Available"
+                }
+              },
+              "recurrence": {
+                "frequency": "Second",
+                "interval": 30
+              }
+            }
+          },
+          "contentVersion": "1.0.0.0",
+          "outputs": {}
+        },
+        "parameters": {
+          "$connections": {
+            "value": {
+              "servicebus": {
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'australiaeast', '/managedApis/', 'servicebus')]",
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('servicebus_1_Connection_Name'))]",
+                "connectionName": "[parameters('servicebus_1_Connection_Name')]"
+              }
+            }
+          }
+        }
+      },
+      "name": "[parameters('LogicAppName')]",
+      "type": "Microsoft.Logic/workflows",
+      "location": "[parameters('LogicAppLocation')]",
+      "tags": {
+        "displayName": "LogicApp"
+      },
+      "apiVersion": "2016-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/connections', parameters('servicebus_1_Connection_Name'))]"
+      ]
+    },
+    {
+      "type": "MICROSOFT.WEB/CONNECTIONS",
+      "apiVersion": "2016-06-01",
+      "name": "[parameters('servicebus_1_Connection_Name')]",
+      "location": "australiaeast",
+      "properties": {
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'australiaeast', '/managedApis/', 'servicebus')]"
+        },
+        "displayName": "[parameters('servicebus_1_Connection_DisplayName')]",
+        "parameterValues": {
+          "connectionString": "[parameters('servicebus_1_connectionString')]"
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}

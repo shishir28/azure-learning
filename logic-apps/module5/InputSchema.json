@@ -1,0 +1,28 @@
+{
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "SequenceNumber": {
+      "$id": "/properties/SequenceNumber",
+      "type": "integer",
+      "title": "The Sequencenumber Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        2
+      ]
+    },
+    "Message": {
+      "$id": "/properties/Message",
+      "type": "string",
+      "title": "The Message Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "kjlkjsadflkjsdlfkjslkfjs"
+      ]
+    }
+  }
+}

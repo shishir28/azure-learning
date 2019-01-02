@@ -1,0 +1,234 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sql_1_Connection_Name": {
+      "type": "string",
+      "defaultValue": "sql"
+    },
+    "sql_1_Connection_DisplayName": {
+      "type": "string",
+      "defaultValue": "shishirlogicappsmodule2"
+    },
+    "sql_1_server": {
+      "type": "string",
+      "metadata": {
+        "description": "SQL server name"
+      },
+      "defaultValue": "shishirmishra.database.windows.net"
+    },
+    "sql_1_database": {
+      "type": "string",
+      "metadata": {
+        "description": "SQL database name"
+      },
+      "defaultValue": "ShishirLogicApps"
+    },
+    "sql_1_username": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Username credential"
+      }
+    },
+    "sql_1_password": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password credential"
+      }
+    },
+    "LogicAppLocation": {
+      "type": "string",
+      "minLength": 1,
+      "allowedValues": [
+        "[resourceGroup().location]",
+        "eastasia",
+        "southeastasia",
+        "centralus",
+        "eastus",
+        "eastus2",
+        "westus",
+        "northcentralus",
+        "southcentralus",
+        "northeurope",
+        "westeurope",
+        "japanwest",
+        "japaneast",
+        "brazilsouth",
+        "australiaeast",
+        "australiasoutheast",
+        "southindia",
+        "centralindia",
+        "westindia",
+        "canadacentral",
+        "canadaeast",
+        "uksouth",
+        "ukwest",
+        "westcentralus",
+        "westus2"
+      ],
+      "defaultValue": "australiaeast"
+    },
+    "LogicAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "RwviewUserCredit"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "properties": {
+        "state": "Enabled",
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "actions": {
+            "Condition": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "greater": [
+                      "@body('Execute_stored_procedure_2')?['outputparameters']?['SpendSum']",
+                      100
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Set_variable": {
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "ApplicationStatus",
+                    "value": true
+                  },
+                  "runAfter": {}
+                }
+              },
+              "runAfter": {
+                "Execute_stored_procedure_2": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Execute_stored_procedure_2": {
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['sql']['connectionId']"
+                  }
+                },
+                "method": "post",
+                "body": {
+                  "AccountNumber": "@triggerBody()?['accountnumber']"
+                },
+                "path": "/datasets/default/procedures/@{encodeURIComponent(encodeURIComponent('[dbo].[Query_TransactionsTotal]'))}"
+              },
+              "runAfter": {
+                "Initialize_variable": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Initialize_variable": {
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "ApplicationStatus",
+                    "type": "Boolean",
+                    "value": false
+                  }
+                ]
+              },
+              "runAfter": {}
+            },
+            "Response_2": {
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                "statusCode": 200,
+                "body": "@variables('ApplicationStatus')"
+              },
+              "runAfter": {
+                "Condition": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "parameters": {
+            "$connections": {
+              "defaultValue": {},
+              "type": "Object"
+            }
+          },
+          "triggers": {
+            "manual": {
+              "type": "Request",
+              "kind": "Http",
+              "inputs": {
+                "schema": {
+                  "properties": {
+                    "accountnumber": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "requestid": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "contentVersion": "1.0.0.0",
+          "outputs": {}
+        },
+        "parameters": {
+          "$connections": {
+            "value": {
+              "sql": {
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'australiaeast', '/managedApis/', 'sql')]",
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('sql_1_Connection_Name'))]",
+                "connectionName": "[parameters('sql_1_Connection_Name')]"
+              }
+            }
+          }
+        }
+      },
+      "name": "[parameters('LogicAppName')]",
+      "type": "Microsoft.Logic/workflows",
+      "location": "[parameters('LogicAppLocation')]",
+      "tags": {
+        "displayName": "LogicApp"
+      },
+      "apiVersion": "2016-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/connections', parameters('sql_1_Connection_Name'))]"
+      ]
+    },
+    {
+      "type": "MICROSOFT.WEB/CONNECTIONS",
+      "apiVersion": "2016-06-01",
+      "name": "[parameters('sql_1_Connection_Name')]",
+      "location": "australiaeast",
+      "properties": {
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'australiaeast', '/managedApis/', 'sql')]"
+        },
+        "displayName": "[parameters('sql_1_Connection_DisplayName')]",
+        "parameterValues": {
+          "server": "[parameters('sql_1_server')]",
+          "database": "[parameters('sql_1_database')]",
+          "username": "[parameters('sql_1_username')]",
+          "password": "[parameters('sql_1_password')]"
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}
