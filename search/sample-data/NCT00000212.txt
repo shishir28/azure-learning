@@ -1,0 +1,33 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000212
+
+Org Study Id: NIDA-06234-1
+
+NCT ID: NCT00000212
+
+Title: IV Cocaine Abuse: A Laboratory Model - 1
+
+Official Title: IV Cocaine Abuse: A Laboratory Model
+
+Summary: 
+      The purpose of this study is to evaluate the effects of desipramine DMI maintenance on
+      cocaine taking and on the physiological and subjective effects of cocaine, including cocaine
+      craving.
+    
+
+Overall Status: Completed
+
+Start Date: July 1987
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 18
+
+Maximum Age: 45
+
+Healthy Volunteers: No
+
+Keywords: ['crack cocaine']

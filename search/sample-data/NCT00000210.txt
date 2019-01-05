@@ -1,0 +1,29 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000210
+
+Org Study Id: NIDA-06116-1
+
+NCT ID: NCT00000210
+
+Title: Treatment Efficacy for Drug Abuse and AIDS Prevention - 1
+
+Official Title: Treatment Efficacy for Drug Abuse and AIDS Prevention
+
+Summary: 
+      The purpose of this study is to assess the safety and effectiveness of buprenorphine for
+      treatment of concurrent intravenous heroin and cocaine dependence.
+    
+
+Overall Status: Completed
+
+Phase: Phase 2
+
+Gender: Male
+
+Minimum Age: 26
+
+Maximum Age: 41
+
+Healthy Volunteers: No
+

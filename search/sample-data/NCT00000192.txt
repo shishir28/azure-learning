@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000192
+
+Org Study Id: NIDA-00191-1
+
+NCT ID: NCT00000192
+
+Title: Neurobiology of Opioid Dependence: 1 - 1
+
+Official Title: Neurobiology of Opioid Dependence: 1
+
+Summary: 
+      The purpose of this study is to evaluate the effects of lamotrigine on naloxone-precipitated
+      opiate withdrawal.
+    
+
+Overall Status: Withdrawn
+
+Start Date: January 1993
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['opioid disorders']

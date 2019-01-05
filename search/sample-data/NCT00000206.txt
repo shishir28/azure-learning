@@ -1,0 +1,33 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000206
+
+Org Study Id: NIDA-06082-2
+
+NCT ID: NCT00000206
+
+Title: Clinical Rescue Protocol - 2
+
+Official Title: Clinical Rescue Protocol
+
+Summary: 
+      The purpose of this study is to detect increasing medication dose results in heroin
+      cessation for patients still using, to determine if decreasing medication dose in patients
+      unable to tolerate medication dose increases retention, and to determine if blood levels of
+      methadone or buprenorphine correlate with clinical response.
+    
+
+Overall Status: Completed
+
+Start Date: April 1991
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 21
+
+Maximum Age: 50
+
+Healthy Volunteers: No
+

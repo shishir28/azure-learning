@@ -1,0 +1,74 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000158
+
+Org Study Id: NEI-60
+
+NCT ID: NCT00000158
+
+Title: Macular Photocoagulation Study (MPS)
+
+Summary: 
+      To evaluate laser treatment of choroidal neovascularization (CNV) through randomized,
+      controlled clinical trials. The Macular Photocoagulation Study (MPS) consisted of three sets
+      of randomized, controlled clinical trials. Change in best-corrected visual acuity from
+      baseline was the primary outcome for all MPS trials. Other measures of vision are evaluated
+      in each set of trials. The purpose of each is described below.
+
+      Argon Study: To determine whether argon blue-green laser photocoagulation of leaking
+      abnormal blood vessels in choroidal neovascular membranes outside the fovea (200 to 2,500
+      microns from the center of the foveal avascular zone [FAZ]) is of benefit in preventing or
+      delaying loss of central vision in patients with age-related (senile) macular degeneration
+      (AMD), presumed ocular histoplasmosis (POH), and idiopathic neovascular membranes (INVM). A
+      separate trial was conducted for each of the three underlying conditions.
+
+      Krypton Study: To determine whether krypton red laser photocoagulation of choroidal
+      neovascular lesions with the posterior border 1 to 199 microns from the center of the FAZ is
+      of benefit in preventing or delaying large losses of visual acuity in patients with AMD,
+      POH, and INVM. A separate trial was conducted for each of the three underlying conditions.
+
+      Foveal Study: To determine whether laser photocoagulation is of benefit in preventing or
+      delaying further visual acuity loss in patients with new (never treated) or recurrent
+      (previously treated with laser photocoagulation) choroidal neovascularization under the
+      center of the FAZ. Two separate trials, one for each type of lesion, were carried out.
+    
+
+Description: 
+      In each randomized trial conducted by the MPS Group, focal laser photocoagulation was
+      compared to observation without treatment. Patients were assigned to laser treatment or to
+      observation with equal probability. The first set of MPS randomized trials, the Argon Study,
+      focused on the effectiveness of photocoagulation with argon blue-green laser in eyes with
+      discrete extrafoveal choroidal neovascularization. The study investigators, who began
+      recruiting patients in 1979, estimated that 550 patients with AMD and 750 with POH would be
+      required. Follow-up was to continue for 5 years to determine whether argon laser
+      photocoagulation treatment could prevent or delay visual acuity loss in these patients.
+
+      After the initiation of the Argon Study, a new krypton red laser became available. The new
+      wavelength offered theoretical advantages over the argon laser for treating CNV that
+      extended inside the FAZ of the macula. The Krypton Study design was analogous to the Argon
+      Study, with the investigation of three underlying conditions, except that CNV was closer to
+      the FAZ center.
+
+      The third set of MPS clinical trials, the Foveal Study, was designed to determine whether
+      laser photocoagulation was effective for delaying or preventing further visual acuity loss
+      in AMD patients who have subfoveal CNV. Among patients assigned to laser treatment in the
+      Foveal Study, argon laser treatment was compared with krypton red laser treatment of these
+      lesions. The investigators originally projected that about 350 patients would be required
+      for each clinical trial of the Foveal Study.
+    
+
+Overall Status: Active, not recruiting
+
+Start Date: February 1979
+
+Phase: Phase 3
+
+Gender: Both
+
+Minimum Age: 18
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['photocoagulation','argon blue-green laser','krypton red laser']

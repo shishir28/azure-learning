@@ -1,0 +1,29 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000201
+
+Org Study Id: NIDA-05196-1
+
+NCT ID: NCT00000201
+
+Title: Pharmacological Modulation of Cocaine Effects - 1
+
+Official Title: Pharmacological Modulation of Cocaine Effects
+
+Summary: 
+      The purpose of this study is to conduct human laboratory studies of possible cocaine
+      interactions with various potential treatment medications.
+    
+
+Overall Status: Completed
+
+Phase: Phase 2
+
+Gender: Female
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+

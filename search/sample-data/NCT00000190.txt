@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000190
+
+Org Study Id: NIDA-00144-4
+
+NCT ID: NCT00000190
+
+Title: Cocaine in Parotid Saliva, Blood and Urine - 4
+
+Official Title: Cocaine in Parotid Saliva, Blood and Urine
+
+Summary: 
+      The purpose of this study is to establish the use of parotid saliva as a means of detecting
+      and quantifying cocaine and its metabolites.
+    
+
+Overall Status: Completed
+
+Start Date: January 1991
+
+Phase: Phase 1
+
+Gender: Male
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['Cocaine Detection','Parotid Saliva']

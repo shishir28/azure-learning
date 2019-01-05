@@ -1,0 +1,34 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000198
+
+Org Study Id: NIDA-00238-3
+
+NCT ID: NCT00000198
+
+Title: Piracetam for Treatment of Cocaine Addiction - 3
+
+Official Title: Piracetam for Treatment of Cocaine Addiction
+
+Summary: 
+      The purpose of this study is to evaluate the effects of IV cocaine administration in cocaine
+      dependent subjects maintained on piracetam while they are residing in an inpatient
+      addictions treatment research unit and to subsequently follow these patients in an eight
+      week open label assessment of piracetam in an outpatient treatment program.
+    
+
+Overall Status: Completed
+
+Start Date: October 1996
+
+Phase: Phase 1
+
+Gender: Male
+
+Minimum Age: 21
+
+Maximum Age: 45
+
+Healthy Volunteers: No
+
+Keywords: ['cocaine']

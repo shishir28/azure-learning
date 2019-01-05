@@ -1,0 +1,40 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000174
+
+Org Study Id: IA0012
+
+NCT ID: NCT00000174
+
+Title: Investigation Into Delay to Diagnosis of Alzheimer's Disease With Exelon (InDDEx)
+
+Summary: 
+      This phase IIIb trial is a prospective, randomized, double-blind, placebo-controlled,
+      36-month study comparing the length of time of progression from mild cognitive impairment
+      (MCI) to a clinical diagnosis of Alzheimer's disease (AD) in subjects taking Exelon vs.
+      placebo. Exelon is currently under review with the U.S. Food and Drug Administration as a
+      treatment for Alzheimer's disease. The drug has been cleared for marketing in more than 40
+      countries for Alzheimer's disease to date, including all 15 member states of the European
+      Union, New Zealand, Argentina, Brazil and Mexico.
+
+      Each subject with MCI will be randomly assigned to treatment with either Exelon or placebo.
+      Subjects assigned to Exelon will receive 1.5 to 6.0 mg bid (twice daily) (3.0 to 12 mg/day)
+      for the majority of the study. At every regular visit scheduled every three months, patients
+      will be given basic efficacy and safety assessments. These assessments will include
+      evaluation of adverse events, vital signs, activities of daily living, and clinical staging
+      scales to determine if the subject may have converted to dementia.
+    
+
+Overall Status: Completed
+
+Phase: Phase 3
+
+Gender: Both
+
+Minimum Age: 55
+
+Maximum Age: 85
+
+Healthy Volunteers: No
+
+Keywords: ['Mild cognitive impairment','Alzheimers disease','Memory','Cholinergic agents','Cholinesterase inhibitors']

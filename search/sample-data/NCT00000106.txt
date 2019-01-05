@@ -1,0 +1,35 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000106
+
+Org Study Id: NCRR-M01RR03186-9943
+
+NCT ID: NCT00000106
+
+Title: 41.8 Degree Centigrade Whole Body Hyperthermia for the Treatment of Rheumatoid Diseases
+
+Summary: 
+      Recently a non-toxic system for whole body hyperthermia (WBH) used at the University of
+      Wisconsin has been shown to induce soluble tumor necrosis factor-receptor (sTNF-R) I and II
+      when patients are heated systemically to 41.8C for 60 minutes. This observation might
+      provide a biological basis for the therapeutic application of WBH to rheumatoid diseases,
+      for which there is a positive anecdotal clinical experience. Inherent in the hypothesis
+      which is the basis for this protocol is the concept that the induction of TNF receptors by
+      WBH may induce a remission in patients with active rheumatoid arthritis. Beyond clinical
+      response the biological endpoint for this investigation includes cytokine levels, TNF
+      levels, sTNF-R levels and changes in cellular TNF receptors.
+    
+
+Overall Status: Active, not recruiting
+
+Phase: N/A
+
+Gender: Both
+
+Minimum Age: 18
+
+Maximum Age: 65
+
+Healthy Volunteers: No
+
+Keywords: ['Rheumatoid Diseases']

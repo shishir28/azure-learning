@@ -1,0 +1,31 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000208
+
+Org Study Id: NIDA-06082-4
+
+NCT ID: NCT00000208
+
+Title: Methadone/Buprenorphine Cross-Over Study - 4
+
+Official Title: Methadone/Buprenorphine Cross-Over Study
+
+Summary: 
+      The purpose of this study is to explore ways to cross patients over from methadone to
+      buprenorphine.
+    
+
+Overall Status: Completed
+
+Start Date: February 1992
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 21
+
+Maximum Age: 50
+
+Healthy Volunteers: No
+

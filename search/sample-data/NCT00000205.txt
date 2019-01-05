@@ -1,0 +1,30 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000205
+
+Org Study Id: NIDA-06082-1
+
+NCT ID: NCT00000205
+
+Title: Buprenorphine Maintenance Protocol - 1
+
+Official Title: Buprenorphine Maintenance Protocol
+
+Summary: 
+      The purpose of this study is to compare the efficacy of buprenorphine versus methadone.
+    
+
+Overall Status: Completed
+
+Start Date: October 1990
+
+Phase: Phase 3
+
+Gender: Both
+
+Minimum Age: 21
+
+Maximum Age: 50
+
+Healthy Volunteers: No
+

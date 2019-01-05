@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000193
+
+Org Study Id: NIDA-00191-2
+
+NCT ID: NCT00000193
+
+Title: Neurobiology of Opioid Dependence: 2 - 2
+
+Official Title: Neurobiology of Opioid Dependence: 2
+
+Summary: 
+      The purpose of this study is to evaluate the effects of gamma hydroxybutyric on
+      naloxone-precipitated opiate withdrawal.
+    
+
+Overall Status: Withdrawn
+
+Start Date: January 1993
+
+Phase: Phase 2
+
+Gender: Male
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['Opioid disorders']

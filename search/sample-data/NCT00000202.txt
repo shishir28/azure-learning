@@ -1,0 +1,31 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000202
+
+Org Study Id: NIDA-05626-1
+
+NCT ID: NCT00000202
+
+Title: Buprenorphine Maintenance for Opioid Addicts - 1
+
+Official Title: Buprenorphine Maintenance for Opioid Addicts
+
+Summary: 
+      The purpose of this study is to evaluate the efficacy of buprenorphine and desipramine in
+      treatment of opiate and cocaine dependence.
+    
+
+Overall Status: Completed
+
+Start Date: August 1988
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 18
+
+Maximum Age: 65
+
+Healthy Volunteers: No
+

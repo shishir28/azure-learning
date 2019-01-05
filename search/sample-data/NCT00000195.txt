@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000195
+
+Org Study Id: NIDA-00191-4
+
+NCT ID: NCT00000195
+
+Title: Neurobiology of Opioid Dependence: 4 - 4
+
+Official Title: Neurobiology of Opioid Dependence: 4
+
+Summary: 
+      The purpose of this study is to determine the effect of chronic naltrexone pre-treatment on
+      the response to yohimbine in healthy volunteers.
+    
+
+Overall Status: Withdrawn
+
+Start Date: January 1993
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['opioid disorders']

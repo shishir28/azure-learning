@@ -1,0 +1,30 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000199
+
+Org Study Id: NIDA-00238-4
+
+NCT ID: NCT00000199
+
+Title: Piracetam for Treatment of Cocaine Addiction, Phase II - 4
+
+Official Title: Piracetam for Treatment of Cocaine Addiction, Phase II
+
+Summary: 
+      The purpose of this study is to follow patients in Phase I of an inpatient study in an eight
+      week open label assessment of piracetam in an outpatient treatment program.
+    
+
+Overall Status: Withdrawn
+
+Phase: Phase 1
+
+Gender: Both
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['cocaine']

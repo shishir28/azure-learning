@@ -1,0 +1,31 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000112
+
+Org Study Id: NCRR-M01RR06022-0029
+
+NCT ID: NCT00000112
+
+Title: Prevalence of Carbohydrate Intolerance in Lean and Obese Children
+
+Summary: 
+      The prevalence of obesity in children is reaching epidemic proportions. Excess adiposity is
+      more than just a cosmetic problem, having substantial metabolic consequences. Insulin
+      resistance, hyperinsulinemia, impaired glucose tolerance, and frank diabetes are often seen
+      in obese children. In this study the prevalence of impaired glucose (carbohydrate) tolerance
+      in lean children with a family history of diabetes and obese children with acanthosis
+      nigricans with or without a family history of diabetes mellitus will be studied.
+    
+
+Overall Status: Recruiting
+
+Phase: N/A
+
+Gender: Both
+
+Minimum Age: 8
+
+Maximum Age: 18
+
+Healthy Volunteers: Accepts Healthy Volunteers
+

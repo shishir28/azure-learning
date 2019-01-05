@@ -1,0 +1,37 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000176
+
+Org Study Id: IA0018
+
+NCT ID: NCT00000176
+
+Title: Alzheimer's Disease Prevention Trial
+
+Official Title: Alzheimer's Disease Prevention Trial. A Multi-center, Randomized, Double-blind Placebo Controlled Trial of Estrogens to Prevent Alzheimer's Disease and Loss of Memory in Women.
+
+Summary: 
+      This is a three-year study to determine if estrogens can prevent memory loss and Alzheimer's
+      disease in women with a family history of Alzheimer's disease.
+    
+
+Description: 
+      PREventing Postmenopausal memory loss and Alzheimer's with Replacement Estrogens (PREPARE)
+      is a double-blind-placebo controlled trial to determine whether estrogen (or estrogen and
+      progesterone) can delay the onset of memory loss or Alzheimer's Disease in elderly women
+      with a family history of the disease.
+    
+
+Overall Status: Completed
+
+Phase: Phase 3
+
+Gender: Female
+
+Minimum Age: 65
+
+Maximum Age: 0
+
+Healthy Volunteers: Accepts Healthy Volunteers
+
+Keywords: ['Alzheimers disease','memory loss','Estrogen']

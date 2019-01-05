@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000187
+
+Org Study Id: NIDA-00144-1
+
+NCT ID: NCT00000187
+
+Title: Ritanserin in Treatment of Cocaine Dependence - 1
+
+Official Title: Ritanserin in Treatment of Cocaine Dependence
+
+Summary: 
+      The purpose of this study is to assess ritanserin as a pharmacotherapy for cocaine
+      dependence.
+    
+
+Overall Status: Completed
+
+Start Date: July 1992
+
+Phase: Phase 2
+
+Gender: Male
+
+Minimum Age: 28
+
+Maximum Age: 47
+
+Healthy Volunteers: No
+
+Keywords: ['Cocaine Dependence','ritanserin']

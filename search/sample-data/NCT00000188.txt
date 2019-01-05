@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000188
+
+Org Study Id: NIDA-00144-2
+
+NCT ID: NCT00000188
+
+Title: Selegiline in Treatment of Cocaine Dependence - 2
+
+Official Title: Selegiline in Treatment of Cocaine Dependence
+
+Summary: 
+      The purpose of this study is to assess selegiline as a pharmacotherapy for cocaine
+      dependence.
+    
+
+Overall Status: Completed
+
+Start Date: September 1994
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 0
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['Cocaine Dependence','Selegiline']

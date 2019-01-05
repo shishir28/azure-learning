@@ -1,0 +1,32 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000209
+
+Org Study Id: NIDA-06082-5
+
+NCT ID: NCT00000209
+
+Title: Buprenorphine Dosing Interval - 5
+
+Official Title: Buprenorphine Dosing Interval
+
+Summary: 
+      The purpose of this study is to explore the feasibility of extending the dosing interval of
+      well maintained buprenorphine patients to 48 and 72 hours, leading to eventual 3 times/week
+      dosing.
+    
+
+Overall Status: Completed
+
+Start Date: November 1992
+
+Phase: Phase 2
+
+Gender: Both
+
+Minimum Age: 21
+
+Maximum Age: 50
+
+Healthy Volunteers: No
+

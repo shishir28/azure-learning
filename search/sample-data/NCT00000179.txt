@@ -1,0 +1,36 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000179
+
+Org Study Id: IA0003
+
+NCT ID: NCT00000179
+
+Title: Agitation in Alzheimer's Disease
+
+Summary: 
+      Agitation affects 70 to 90 percent of patients with AD. Signs of agitation include verbal
+      and physical aggressiveness, irritability, wandering, and restlessness. These behaviors
+      often make caring for patients at home very difficult. Trazodone and haldol are two of the
+      most commonly prescribed drugs for agitation in AD patients. Behavior management, a non drug
+      approach, has been effective in reducing signs of agitation. Researchers have yet to compare
+      the effectiveness of drug versus non drug therapy to treat agitation in AD patients and
+      determine which is the best treatment. The Alzheimer's Disease Cooperative Study, with
+      funding from the National Institute on Aging, is conducting an agitation treatment program
+      at 21 sites in 16 States. This study will assess which of the above treatments is most
+      effective.
+    
+
+Overall Status: Completed
+
+Phase: Phase 3
+
+Gender: Both
+
+Minimum Age: 50
+
+Maximum Age: 0
+
+Healthy Volunteers: No
+
+Keywords: ['Alzheimers disease','Psychomotor agitation','Behavioral symptoms','Haloperidol','Trazodone','Anti-psychotic agents','Anti-depressant agents']

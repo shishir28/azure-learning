@@ -1,0 +1,38 @@
+Date: ClinicalTrials.gov processed this data on October 25, 2016
+
+URL: https://clinicaltrials.gov/show/NCT00000175
+
+Org Study Id: IA0016
+
+NCT ID: NCT00000175
+
+Title: The Effects of Sex Hormones on Cognition and Mood in Older Adults
+
+Summary: 
+      This study is investigating the effects of hormone replacement therapy on memory, mental
+      abilities and mood in older adults aged 65-90. During the nine month long study, men will
+      take testosterone for three months and women will take estrogen for three months. At four
+      points during the study (once every three months), participants will complete a test battery
+      and have blood drawn.
+    
+
+Description: 
+      Double-blind, placebo-controlled, crossover study investigating the effects of estrogen
+      replacement and testosterone replacement on cognition and mood in older adults. Women who
+      have not had a hysterectomy will be given Prempro (estrogen with progesterone to protect the
+      uterine lining), and hysterectomized women will be given Premarin (estrogen only).
+    
+
+Overall Status: Terminated
+
+Phase: N/A
+
+Gender: Both
+
+Minimum Age: 65
+
+Maximum Age: 90
+
+Healthy Volunteers: Accepts Healthy Volunteers
+
+Keywords: ['Emotions','Cognition','Aging','Memory']
