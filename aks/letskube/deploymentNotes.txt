@@ -1,0 +1,47 @@
+1. Create Resource Group: az group create -n shishirletskuberg -l australiaeast
+2. Check the list ACR: az acr list
+3. Create an ACR: az acr create -n shishirletskubeacr -g shishirletskuberg -l australiaeast --sku standard
+
+4. logon to ACR: az acr login -n shishirletskubeacr
+5. Create tag for ACR for local image :docker tag letskube:local shishirletskubeacr.azurecr.io/shishirletskubeacr:v1
+6. Push into registry: docker push shishirletskubeacr.azurecr.io/shishirletskubeacr:v1
+
+7 . Check the repositry : az acr repository list  -n shishirletskubeacr
+
+shishirletskubeacr.azurecr.io (login server)
+
+8. Create Service Prinicipal : az ad sp create-for-rbac --skip-assignment 
+    "appId": "721b8b38-57a8-4d45-b66b-732bd357bbe6",
+	"password": "e94f96a1-681d-4de4-aee8-5cc00a9dc67b",
+
+
+9: ACR reource ID:  $acrID = az acr show --name shishirletskubeacr --resource-group shishirletskuberg --query "id" --output tsv
+
+10: Grant the reader role : az role assignment create --assignee "721b8b38-57a8-4d45-b66b-732bd357bbe6" --role Reader --scope $acrID
+
+11. Create a cluster :
+az aks create --name shishirletskubeakscluster --resource-group  shishirletskuberg --node-count 1 --generate-ssh-keys --service-principal "721b8b38-57a8-4d45-b66b-732bd357bbe6" --client-secret "e94f96a1-681d-4de4-aee8-5cc00a9dc67b"
+
+12. Get credentials for cluster: az aks get-credentials --name shishirletskubeakscluster  --resource-group  shishirletskuberg
+13: get the login server : az acr list --resource-group shishirletskuberg --query "[].{acrLoginServer:loginServer}" --output table
+
+14 : cat C:\Users\SXM29\.kube\config | sls "shishirletskubeakscluster"
+
+15: check if we are really conencted to AKS cluster:  kubectl get nodes 
+
+16 : Deploy the applicatio nto AKS cluster :  kubectl apply -f .\letskubedeploy.yml
+17.Check the progress of deployment :  kubectl get service --watch
+    It will show the xternal ip address , get it and put it in browser to see the application
+19: Check the number of current nodes : kubectl get nodes 
+18: Scale up to 3 : az aks scale  --resource-group  shishirletskuberg --name=shishirletskubeakscluster --node-count 3 
+20 Check the number of current nodes  again: kubectl get nodes 
+
+21: Get current number of pods kubectl get pods 
+22 : Get deployment details : kubectl get deployment
+23:  kubectl scale --replicas=5 deployment/letskube-deployment
+
+24: Chane the application code  
+ build docker image:  docker build . -t shishirletskubeacr.azurecr.io/shishirletskubeacr:v2 
+ push docker image:  docker push shishirletskubeacr.azurecr.io/shishirletskubeacr:v2
+ kubectl apply -f .\letskubedeploy.yml
+ AND IT WORKS :-) 

@@ -1,0 +1,18 @@
+1) Show all locations: az account list-locations 
+2) Create Resource group: az group create --name shishirrg1 --location "Australia East"
+
+3) Create storage account: az storage account create --location "Australia East"  --kind StorageV2 --name shishirstrg1 --resource-group shishirrg1  --sku Standard_LRS
+
+4) Show Connection string: az storage account show-connection-string --name  shishirstrg1 --resource-group shishirrg1
+
+
+5) SET AZURE_STORAGE_CONNECTION_STRING="XYZ"
+
+6) Create container based on environment variable : az storage container create --name container1
+                                                    az storage container create --name container2  --public-access blob
+                                                    az container set-permission --name container1 --public-access container 
+
+
+7) See the existing delete policy: az storage blob service-properties delete-policy show --account-name shishirstrg1
+
+8) Update the delete policy: az storage blob service-properties delete-policy update --enable true --days-retained 8 --account-name shishirstrg1
