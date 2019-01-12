@@ -1,0 +1,8 @@
+{
+  "SingleTransaction": 
+ {
+        "TransactionId": "10",
+        "AccountNumber": "1234567810",
+        "Amount": "1.75"
+      }
+}

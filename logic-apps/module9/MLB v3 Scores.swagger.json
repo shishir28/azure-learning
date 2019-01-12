@@ -1,0 +1,526 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MLB v3 Scores",
+    "version": "1.0",
+    "description": "MLB scores API."
+  },
+  "host": "api.fantasydata.net",
+  "basePath": "/v3/mlb/scores",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/{format}/teams": {
+      "get": {
+        "operationId": "5944013814338d0eb80b279a",
+        "summary": "Teams (Active)",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/Stadiums": {
+      "get": {
+        "operationId": "5944013814338d0eb80b279b",
+        "summary": "Stadiums",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "xml",
+            "enum": [
+              "xml",
+              "json"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/Games/{season}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b279c",
+        "summary": "Schedules",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/GamesByDate/{date}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b279d",
+        "summary": "Games by Date",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "The date of the game(s).\n<br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/Players": {
+      "get": {
+        "operationId": "5944013814338d0eb80b279e",
+        "summary": "Player Details by Active",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/FreeAgents": {
+      "get": {
+        "operationId": "5944013814338d0eb80b279f",
+        "summary": "Player Details by Free Agents",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/Players/{team}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a0",
+        "summary": "Players by Team",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "team",
+            "in": "path",
+            "description": "The abbreviation of the requested team.\n<br>Examples: <code>SF</code>, <code>NYY</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/TeamGameStatsByDate/{date}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a1",
+        "summary": "Team Game Stats by Date",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "The date of the game(s).\n<br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/TeamSeasonStats/{season}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a2",
+        "summary": "Team Season Stats",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Year of the season.\n<br>Examples: <code>2017</code>, <code>2018</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/NewsByDate/{date}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a3",
+        "summary": "News by Date",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "The date of the news.\n<br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/News": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a4",
+        "summary": "News",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/NewsByPlayerID/{playerid}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a5",
+        "summary": "News by Player",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "playerid",
+            "in": "path",
+            "description": "Unique FantasyData Player ID.\nExample:<code>10000507</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/AreAnyGamesInProgress": {
+      "get": {
+        "description": "Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.",
+        "operationId": "5944013814338d0eb80b27a6",
+        "summary": "Are Games In Progress",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/Player/{playerid}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a7",
+        "summary": "Player Details by Player",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "playerid",
+            "in": "path",
+            "description": "Unique FantasyData Player ID.\nExample:<code>10000507</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/CurrentSeason": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a8",
+        "summary": "Current Season",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/Standings/{season}": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27a9",
+        "summary": "Standings",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          },
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Year of the season.\n<br>Examples: <code>2017</code>, <code>2018</code>.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{format}/AllTeams": {
+      "get": {
+        "operationId": "5944013814338d0eb80b27aa",
+        "summary": "Teams (All)",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.",
+            "required": true,
+            "type": "string",
+            "default": "XML",
+            "enum": [
+              "XML",
+              "JSON"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
