@@ -33,10 +33,13 @@ namespace AnimationCreator.Utils.Bacth
                 var skuAndImage = await GetNodeAgentSkuReferenceAsync(imageScanner);
 
                 var pool = _batchClient.PoolOperations.CreatePool(poolId: poolId,
-                                virtualMachineSize: "standard_d1_v2", //VM Size
+                                virtualMachineSize: "standard_d1_v2", //VM Size standard_d1_v2
                                 targetDedicatedComputeNodes: 1,
                                 virtualMachineConfiguration: new VirtualMachineConfiguration(skuAndImage.Image, skuAndImage.SKU.Id) // VM configuration
                                 );
+
+                //pool.MaxTasksPerComputeNode = 4;
+                //pool.TaskSchedulingPolicy = new TaskSchedulingPolicy(ComputeNodeFillType.Spread);
                 pool.ApplicationPackageReferences = new List<ApplicationPackageReference>
                 {
                     new ApplicationPackageReference{ApplicationId ="PolyRay",Version="1"}

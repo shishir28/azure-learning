@@ -32,42 +32,42 @@ namespace AnimationCreator.Console
             var appsettings = options.Value;
 
             int width = 1280;
-            int height = 720;
+            int height = 72;
 
-            int numberOfFrames = 10;
+            int numberOfFrames = 1000;
             string poolName = "RenderPool";
-            string jobName = "RenderJob";
+            string jobName = "FourRenderJob";
 
             // Create the Animation and upload to Blob storage
             //System.Console.WriteLine("Press enter to CreateTestAnimation...");
-            //System.Console.ReadLine();
-            //CreateTestAnimation(width, height, numberOfFrames, generateErrors: false, appSettings:appsettings);
+            ////System.Console.ReadLine();
+            //CreateTestAnimation(width, height, numberOfFrames, generateErrors: false, appSettings: appsettings);
             //System.Console.WriteLine("CreateTestAnimation complete!");
 
             // Create the Pool
-            //System.Console.WriteLine("Press enter to CreatePool...");
-            ////System.Console.ReadLine();
-            //CreatePool(poolName, appsettings);
-            //System.Console.WriteLine("CreatePool complete!");
+            System.Console.WriteLine("Press enter to CreatePool...");
+            //System.Console.ReadLine();
+            CreatePool(poolName, appsettings);
+            System.Console.WriteLine("CreatePool complete!");
 
             // Create the Azure Batch job
 
             System.Console.WriteLine("Press enter to CreateJob...");
             //System.Console.ReadLine();
-            //CreateJob(poolName, jobName, appsettings);
-            //System.Console.WriteLine("CreateJob complete!");
+            CreateJob(poolName, jobName, appsettings);
+            System.Console.WriteLine("CreateJob complete!");
 
-            //// Add tasks to the job
-            //System.Console.WriteLine("Press enter to AddTasks...");
+            // Add tasks to the job
+            System.Console.WriteLine("Press enter to AddTasks...");
             //System.Console.ReadLine();
-            //AddTasks(jobName, numberOfFrames, appsettings);
-            //System.Console.WriteLine("AddTasks complete!");
+            AddTasks(jobName, numberOfFrames, appsettings);
+            System.Console.WriteLine("AddTasks complete!");
 
             // // Download the animation frames
-            System.Console.WriteLine("Press enter to DownloadFrames...");
-            //System.Console.ReadLine();
-            DownloadFrames(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Animation"), numberOfFrames, appsettings);
-            System.Console.WriteLine("DownloadFrames complete!");
+            //System.Console.WriteLine("Press enter to DownloadFrames...");
+            ////System.Console.ReadLine();
+            //DownloadFrames(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Animation"), numberOfFrames, appsettings);
+            //System.Console.WriteLine("DownloadFrames complete!");
 
             System.Console.WriteLine("Demo Complete!");
             System.Console.ReadLine();
