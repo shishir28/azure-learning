@@ -48,3 +48,4 @@ bld/
 [Oo]bj/*.*
 src/**/package-lock.json
 src/**/dist/
+launchSettings.json
