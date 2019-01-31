@@ -28,7 +28,7 @@ namespace AZStorageSample
         public string Color { get; set; }
 
     }
-    public class AazureTableSample
+    public class AzureTableSample
     {
         public static void Invoke(string connectionStrings)
         {

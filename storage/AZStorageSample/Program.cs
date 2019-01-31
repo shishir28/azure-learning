@@ -15,8 +15,9 @@ namespace AZStorageSample
         {
             var serviceProvider = Program.Intitialize();
             var appSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>>();
-            StorageAccountSample.Invoke(appSettings.Value.ConnectionStrings);
-            // AazureTableSample.Invoke(appSettings.Value.ConnectionStrings);
+            // StorageAccountSample.Invoke(appSettings.Value.ConnectionStrings);
+            // AzureTableSample.Invoke(appSettings.Value.ConnectionStrings);
+            CosmosDBSample.Invoke(appSettings.Value);
             Console.WriteLine("Press any key to terminate ...");
             Console.ReadKey();
         }

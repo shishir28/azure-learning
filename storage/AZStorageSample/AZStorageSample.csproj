@@ -6,6 +6,7 @@
   </PropertyGroup>
  <ItemGroup>
     <!-- <PackageReference Include="coreprofiler" Version="1.1.2" /> -->
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.2.1" />
     <PackageReference Include="Microsoft.Azure.KeyVault.Core" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.1" />
