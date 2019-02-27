@@ -2,7 +2,7 @@
 
 az telemetry --enable
 
-$resourceGroup = "ShishirAddressBookRG"
+$resourceGroup = "shishiraddressbookrg"
 $location = "australiaeast"
 
 # Create resource group
@@ -10,8 +10,8 @@ az group create -n $resourceGroup -l $location
 
 $dbAdminPassword = "Xyz1234#"
 $dbAdminUser = "sqladmin"
-$dbServer = "ShishirAddressBookDBServer"
-$dbName = "ShishirAddressBook"
+$dbServer = "shishiraddressbookdbserver"
+$dbName = "shishiraddressbook"
 
 # create a DB Server
 
@@ -50,7 +50,7 @@ $redisConnectionString ="$($redisHostName):$($redisPort),password=$($redisPrimar
 
 # create a new Azure Key Vault
 
-$kvName = "shishiraddressbookKV"
+$kvName = "shishiraddressbookkv1"
 
 az keyvault create --name $kvName --resource-group $resourceGroup  --location $location
 
@@ -70,7 +70,7 @@ $secret = az keyvault secret set --vault-name $kvName --name $secretName  --valu
 
 # create a secret policy
 
-az keyvault set-policy --name $kvName --secret-permissions get  --spn fe502ad9-8d77-4b6b-83a1-0a01865f8852
+az keyvault set-policy --name $kvName --secret-permissions get  --spn aaf67c54-fe10-44a3-8f1c-48ad6bf71090
 
 
 # Enable soft delete
@@ -84,16 +84,16 @@ az resource update --resource-group $resourceGroup  --name $kvName --resource-ty
 az keyvault delete --name $kvName --resource-group $resourceGroup
 
 # recover a "soft deleted vault"
-az keyvault recover --resource-group $resourceGroup --name $kvName --location $location
+#az keyvault recover --resource-group $resourceGroup --name $kvName --location $location
 
 
 #enable "Do Not Purge" on a key vault
-az resource update --resource-group $resourceGroup  --name $kvName --resource-type $resouceType --set properties.enablePurgeProtection=true
+#az resource update --resource-group $resourceGroup  --name $kvName --resource-type $resouceType --set properties.enablePurgeProtection=true
 
 # permanantly delete a "soft deleted" key vault - does not work if "Do Not Purge" is enabled
 
-az keyvault purge --name $kvName  --location $location
+#az keyvault purge --name $kvName  --location $location
 
 # delete resource group and every resource under it
 
-az group delete -n $resourceGroup - y 
+#az group delete -n $resourceGroup -y 

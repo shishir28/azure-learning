@@ -1,11 +1,10 @@
 ﻿using MyAddressBookPlus.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using StackExchange.Redis;
-using System.Configuration;
 using Newtonsoft.Json;
 using MyAddressBookPlus.Models;
+using System.Configuration;
 
 namespace MyAddressBookPlus.Services
 {
@@ -16,6 +15,13 @@ namespace MyAddressBookPlus.Services
         {
             string cacheConnection = ConfigurationManager.AppSettings["CacheConnection"].ToString();
             return ConnectionMultiplexer.Connect(cacheConnection);
+            //ConfigurationOptions option = new ConfigurationOptions
+            //{
+            //    AbortOnConnectFail = false,
+            //    EndPoints = { KeyVaultService.CacheConnection }
+            //};
+
+            //return ConnectionMultiplexer.Connect(KeyVaultService.CacheConnection);
         });        
         IDatabase cache = lazyConnection.Value.GetDatabase();
 
