@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Monad.Eventhubs.Core
+﻿namespace Monad.Eventhubs.Core
 {
     public enum DeviceType
     {

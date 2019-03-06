@@ -4,10 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Monad.Eventhubs.Core;
-using System.Collections.Generic;
 using System;
 
-namespace Monad.Eventhubs.ConsoleApp
+namespace Monad.Eventhubs.ConsumerApp
 {
     class Program
     {
@@ -15,14 +14,7 @@ namespace Monad.Eventhubs.ConsoleApp
         {
             var serviceProvider = Program.Intitialize();
             var appSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value;
-
             var storageConnectionString = $"DefaultEndpointsProtocol=https;AccountName={appSettings.StorageAccounName};AccountKey={appSettings.StorageAccountKey};EndpointSuffix=core.windows.net";
-
-            // publisher code 
-            var publisher = new Publisher();
-            publisher.Init(appSettings.PublisherConnectionStrings);
-            var strings = new List<string> { "Hello", "World" };
-            publisher.PublishAsync(strings).GetAwaiter().GetResult();
 
             // consumer code                        
             var eventProcessorHost = new EventProcessorHost(appSettings.EventHubName,
@@ -39,6 +31,7 @@ namespace Monad.Eventhubs.ConsoleApp
         private static IServiceProvider Intitialize()
         {
             var environmentName = Environment.GetEnvironmentVariable("EVENT_HUB_ENVIRONMENT");
+            Console.WriteLine(environmentName);
             var services = new ServiceCollection();
             var builder = new ConfigurationBuilder()
                  .AddJsonFile("appsettings.json")
@@ -52,3 +45,4 @@ namespace Monad.Eventhubs.ConsoleApp
         }
     }
 }
+

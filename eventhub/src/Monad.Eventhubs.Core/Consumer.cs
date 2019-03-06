@@ -1,6 +1,5 @@
 using Microsoft.Azure.EventHubs.Processor;
 using Microsoft.Azure.EventHubs;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;

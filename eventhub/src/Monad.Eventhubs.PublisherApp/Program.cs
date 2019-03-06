@@ -1,13 +1,11 @@
-﻿using Microsoft.Azure.EventHubs.Processor;
-using Microsoft.Azure.EventHubs;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Monad.Eventhubs.Core;
 using System.Collections.Generic;
 using System;
 
-namespace Monad.Eventhubs.ConsoleApp
+namespace Monad.Eventhubs.PublisherApp
 {
     class Program
     {
@@ -24,13 +22,6 @@ namespace Monad.Eventhubs.ConsoleApp
             var strings = new List<string> { "Hello", "World" };
             publisher.PublishAsync(strings).GetAwaiter().GetResult();
 
-            // consumer code                        
-            var eventProcessorHost = new EventProcessorHost(appSettings.EventHubName,
-                    PartitionReceiver.DefaultConsumerGroupName, appSettings.EventHubConnectionStrings, storageConnectionString, appSettings.StorageAccounName);
-            var options = new EventProcessorOptions();
-            options.SetExceptionHandler((x) => { Console.WriteLine(x.Exception); });
-            // regist the event host 
-            eventProcessorHost.RegisterEventProcessorAsync<Consumer>(options).Wait();
 
             Console.WriteLine("Press any key to terminate the application");
             Console.Read();
