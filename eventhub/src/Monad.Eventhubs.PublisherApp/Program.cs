@@ -19,9 +19,17 @@ namespace Monad.Eventhubs.PublisherApp
             // publisher code 
             var publisher = new Publisher();
             publisher.Init(appSettings.PublisherConnectionStrings);
-            var strings = new List<string> { "Hello", "World" };
-            publisher.PublishAsync(strings).GetAwaiter().GetResult();
 
+            var random = new Random(Environment.TickCount);
+            const int numEvents = 1000;
+
+
+            for (var i = 0; i < numEvents; i++)
+            {
+                var deviceTelemetry = DeviceTelemetry.GenerateRandom(random);
+                publisher.PublishAsync(deviceTelemetry).GetAwaiter().GetResult();
+                Console.WriteLine($"Published {i + 1} events...");
+            }
 
             Console.WriteLine("Press any key to terminate the application");
             Console.Read();

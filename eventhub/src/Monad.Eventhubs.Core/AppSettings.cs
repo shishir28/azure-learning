@@ -7,5 +7,8 @@ namespace Monad.Eventhubs.Core
         public string EventHubName { get; set; }
         public string StorageAccounName { get; set; }
         public string StorageAccountKey { get; set; }
+        public string DatabaseConnectionStrings { get; set; }
+
+
     }
 }

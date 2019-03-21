@@ -9,7 +9,12 @@ $eventHubName = "monadeventhub"
 $storageAccName = "monadeventhubstrg"
 $storageSKU = "Standard_LRS"
 
-az storage account create  --location $location  --name $storageAccName  --resource-group  $resourceGroup  --sku $storageSKU
+$dbAdminPassword = "Test1234#"
+$dbAdminUser = "sqladmin"
+$dbServer = "monadeventhubdbserver"
+$dbName = "monadeventhubdb"
+
+
 
 
 # Create resource group
@@ -25,5 +30,16 @@ az eventhubs eventhub create --name $eventHubName --resource-group $resourceGrou
 az storage account create  --location $location  --name $storageAccName  --resource-group  $resourceGroup  --sku $storageSKU
 
 
-az group delete -n $resourceGroup -y
+# create a DB Server
+
+az sql server create   --name $dbServer --admin-user $dbAdminUser  --admin-password $dbAdminPassword  --location  $location  --resource-group  $resourceGroup 
+ 
+# create a DB 
+
+az sql db create --name $dbName --resource-group $resourceGroup  --server $dbServer
+
+
+
+# Execute following line to do clean up. 
+# az group delete -n $resourceGroup -y
 

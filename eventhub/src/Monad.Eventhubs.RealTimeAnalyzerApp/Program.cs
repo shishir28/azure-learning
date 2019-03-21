@@ -21,7 +21,7 @@ namespace Monad.Eventhubs.RealTimeAnalyzerApp
                     PartitionReceiver.DefaultConsumerGroupName, appSettings.EventHubConnectionStrings, storageConnectionString, appSettings.StorageAccounName);
             var options = new EventProcessorOptions();
             options.SetExceptionHandler((x) => { Console.WriteLine(x.Exception); });
-            // regist the event host 
+            // register the event host 
             eventProcessorHost.RegisterEventProcessorAsync<RealTimeConsumer>(options).Wait();
 
             Console.WriteLine("Press any key to terminate the application");

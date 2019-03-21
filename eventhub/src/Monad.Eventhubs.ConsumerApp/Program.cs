@@ -21,7 +21,7 @@ namespace Monad.Eventhubs.ConsumerApp
                     PartitionReceiver.DefaultConsumerGroupName, appSettings.EventHubConnectionStrings, storageConnectionString, appSettings.StorageAccounName);
             var options = new EventProcessorOptions();
             options.SetExceptionHandler((x) => { Console.WriteLine(x.Exception); });
-            // regist the event host 
+            // register the event host 
             eventProcessorHost.RegisterEventProcessorAsync<Consumer>(options).Wait();
 
             Console.WriteLine("Press any key to terminate the application");
@@ -31,7 +31,6 @@ namespace Monad.Eventhubs.ConsumerApp
         private static IServiceProvider Intitialize()
         {
             var environmentName = Environment.GetEnvironmentVariable("EVENT_HUB_ENVIRONMENT");
-            Console.WriteLine(environmentName);
             var services = new ServiceCollection();
             var builder = new ConfigurationBuilder()
                  .AddJsonFile("appsettings.json")
