@@ -69,9 +69,15 @@ $vmAdminPassword = "Welcome1234#"
 
 az vm create -n $vmName -g $resourceGroup  --admin-username  $vmAdminUser  --admin-password  $vmAdminPassword   --location $location   --image Win2012R2Datacenter 
 
-$appInsightname = "shishirnotes-appinsights"
+$appInsightsName = "shishirnotes-appinsights"
 
 
-z resource create   -g $resourceGroup    --resource-type "Microsoft.Insights/components"  --name $appInsightname      --location $location  --properties '{"Application_Type":"web"}'
+
+$propsFile = "props.json"
+'{"Application_Type":"web"}' | Out-File $propsFile
+
+
+az resource create  -n $appInsightsName -g $resourceGroup  --resource-type "Microsoft.Insights/components"  --properties "@$propsFile"
+
 # az group delete -n $resourceGroup -y
 
