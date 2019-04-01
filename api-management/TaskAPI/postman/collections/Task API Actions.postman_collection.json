@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "973186cf-016f-425e-83f5-748850a3ccdc",
+		"name": "Task API Actions",
+		"description": "HTTP Actions for Task Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Step 1: Create a  new User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var random = Math.random();",
+							"var emailAddress = \"test_direct_api\"+random*100+\"@mail.com\";",
+							"postman.setEnvironmentVariable(\"userName\", emailAddress);",
+							"postman.setEnvironmentVariable(\"userId\", undefined);",
+							"postman.setEnvironmentVariable(\"taskListId\", undefined);",
+							"postman.setEnvironmentVariable(\"taskId\", undefined);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"emailAddress\":\"{{userName}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/api/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				},
+				"description": "Creating a new user"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 2: Read a given user details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47fdd92a-811a-48c4-ae77-c552f578fae2",
+						"exec": [
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.environment.set(\"userId\", jsonData.userId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/user/{{userName}}?datetime={{$timestamp}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"{{userName}}"
+					],
+					"query": [
+						{
+							"key": "datetime",
+							"value": "{{$timestamp}}"
+						}
+					]
+				},
+				"description": "Read User detail by providing email address. The UserId is used to create new tasklists"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 3: Create a new Task List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"{{userId}}\",\"taskListTitle\":\"New Task List please\"}"
+				},
+				"url": {
+					"raw": "{{url}}/api/tasklist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"tasklist"
+					]
+				},
+				"description": "Create new task list against a 'UserId'"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 4: Read Task Lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72a0a06f-b52c-4378-83f6-f348ec7e0c02",
+						"exec": [
+							"pm.test(\"Read Task List Data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"     pm.environment.set(\"taskListId\", jsonData[0].taskListId);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/tasklist/{{userId}}?datetime={{$timestamp}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"tasklist",
+						"{{userId}}"
+					],
+					"query": [
+						{
+							"key": "datetime",
+							"value": "{{$timestamp}}"
+						}
+					]
+				},
+				"description": "Get all tasklist for a user. TaskListId is used to read or create tasks under it"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 5: Create a new Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"taskListId\":\"{{taskListId}}\",\"taskTitle\":\"New Task\"}"
+				},
+				"url": {
+					"raw": "{{url}}/api/task",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"task"
+					]
+				},
+				"description": "Create a new task under a task list using 'TaskListId'"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 6: Read Tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db57ed4b-d5e8-4ecb-af7b-65aac7f00c81",
+						"exec": [
+							"pm.test(\"Read Task  Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.environment.set(\"taskId\", jsonData[0].taskId);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/task/{{taskListId}}?datetime={{$timestamp}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"task",
+						"{{taskListId}}"
+					],
+					"query": [
+						{
+							"key": "datetime",
+							"value": "{{$timestamp}}"
+						}
+					]
+				},
+				"description": "Create a new task under a task list using 'TaskListId'"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 7: Update a task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"taskId\":\"{{taskId}}\", \"taskListId\":\"{{taskListId}}\", \"data\":[{\"key\":\"Title\",\"value\":\"New Text\"},{\"key\":\"IsCompleted\",\"value\":\"false\"}]}"
+				},
+				"url": {
+					"raw": "{{url}}/api/task",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"task"
+					]
+				},
+				"description": "Update a teask using PUT method"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 8: Read Tasks after update",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/task/{{taskListId}}?datetime={{$timestamp}}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"task",
+						"{{taskListId}}"
+					],
+					"query": [
+						{
+							"key": "datetime",
+							"value": "{{$timestamp}}}"
+						}
+					]
+				},
+				"description": "GEt the updated list"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 9: Delete a Task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"taskListId\":\"{{taskListId}}\",\"taskId\":\"{{taskId}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/api/task",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"task"
+					]
+				},
+				"description": "Delete a task using TaskId"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 10: Delete a Task List",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"{{userId}}\",\"taskListId\":\"{{taskListId}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/api/tasklist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"tasklist"
+					]
+				},
+				"description": "Delete a task list using TaskListId"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 11: Delete a User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"{{userId}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/api/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				},
+				"description": "Delete the specified user"
+			},
+			"response": []
+		}
+	]
+}
