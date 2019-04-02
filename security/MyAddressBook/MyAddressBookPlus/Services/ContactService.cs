@@ -13,15 +13,15 @@ namespace MyAddressBookPlus.Services
         // Redis cache initialization
         private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
-            string cacheConnection = ConfigurationManager.AppSettings["CacheConnection"].ToString();
-            return ConnectionMultiplexer.Connect(cacheConnection);
+            //string cacheConnection = ConfigurationManager.AppSettings["CacheConnection"].ToString();
+            //return ConnectionMultiplexer.Connect(cacheConnection);
             //ConfigurationOptions option = new ConfigurationOptions
             //{
             //    AbortOnConnectFail = false,
             //    EndPoints = { KeyVaultService.CacheConnection }
             //};
 
-            //return ConnectionMultiplexer.Connect(KeyVaultService.CacheConnection);
+            return ConnectionMultiplexer.Connect(KeyVaultService.CacheConnection);
         });        
         IDatabase cache = lazyConnection.Value.GetDatabase();
 

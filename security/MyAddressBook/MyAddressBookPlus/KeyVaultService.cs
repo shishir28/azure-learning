@@ -21,18 +21,5 @@ namespace MyAddressBookPlus
             return result.AccessToken;
         }
 
-        //public static async Task<string> GetToken(string authority, string resource, string scope)
-        //{
-        //    var authContext = new Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext(authority);
-        //    ClientCredential clientCred = new ClientCredential(WebConfigurationManager.AppSettings["ClientId"],
-        //                WebConfigurationManager.AppSettings["ClientSecret"]);
-        //    AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
-
-        //    if (result == null)
-        //        throw new InvalidOperationException("Failed to obtain the JWT token");
-
-        //    return result.AccessToken;
-        //}
-
     }
 }

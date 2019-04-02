@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using MyAddressBookPlus.Models;
+using Microsoft.Azure.Services.AppAuthentication;
 
 namespace MyAddressBookPlus.Data
 {
@@ -15,7 +16,12 @@ namespace MyAddressBookPlus.Data
         public ContactRepository()
         {
             var connectionstring = ConfigurationManager.ConnectionStrings["SqlDataConnection"].ConnectionString;
-            db = new SqlConnection(connectionstring);
+            var accessToken = (new AzureServiceTokenProvider()).GetAccessTokenAsync("https://database.windows.net/").Result;
+            db = new SqlConnection()
+            {
+                AccessToken = accessToken,
+                ConnectionString = connectionstring
+            };
         }
 
         public int AddContact(Contact contact)
@@ -49,7 +55,6 @@ namespace MyAddressBookPlus.Data
         {
             var sql = "SELECT * FROM dbo.[Contact] order by id";
             var result = db.Query<Contact>(sql).ToList();
-
             return result;
         }
     }
