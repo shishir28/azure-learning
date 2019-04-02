@@ -8,9 +8,35 @@ using TaskAPI.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
 
 namespace TaskAPI
 {
+    public class SwaggerOperationNameFilter : IOperationFilter
+    {
+        public void Apply(Operation operation, OperationFilterContext context)
+        {
+            operation.OperationId = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
+                .Union(context.MethodInfo.GetCustomAttributes(true))
+                .OfType<SwaggerOperationAttribute>()
+                .Select(a => a.OperationId)
+                .FirstOrDefault();
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class SwaggerOperationAttribute : Attribute
+    {
+        public SwaggerOperationAttribute(string operationId)
+        {
+            OperationId = operationId;
+        }
+
+        public string OperationId { get; }
+    }
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)
@@ -39,8 +65,7 @@ namespace TaskAPI
                       options.UseInMemoryDatabase("TaskDatabase")
                              .UseInternalServiceProvider(serviceProvider));
 
-        //  services.AddEntityFrameworkInMemoryDatabase()
-        //    .AddDbContext<TaskContext>();
+
 
             services.AddSwaggerGen(c =>
             {
@@ -53,7 +78,7 @@ namespace TaskAPI
                     Contact = new Contact
                     {
                         Name = "Shishir Mishra",
-                        Email = string.Empty,
+                        Email = "shishir28@live.com",
                         Url = "https://twitter.com/shishir28"
                     },
                     License = new License
@@ -62,6 +87,7 @@ namespace TaskAPI
                         Url = "https://example.com/license"
                     }
                 });
+                c.OperationFilter<SwaggerOperationNameFilter>();
             });
 
         }

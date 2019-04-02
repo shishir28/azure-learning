@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TaskAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace TaskAPI.Controllers
 {
@@ -18,7 +19,11 @@ namespace TaskAPI.Controllers
         }
 
         // GET: api/tasklist/8ab4fcbd993f49ce8a21103c713bf47a
+        [SwaggerOperation("GetAllTaskLists")]
+
         [HttpGet("{userId}")]
+        [ProducesResponseType(typeof(IEnumerable<TaskList>), StatusCodes.Status200OK)]
+
         public async Task<IEnumerable<TaskList>> GetAll(string userId)
         {
             return await _context.TaskLists.Where(p => p.UserId == userId && p.IsDeleted != true).ToListAsync();

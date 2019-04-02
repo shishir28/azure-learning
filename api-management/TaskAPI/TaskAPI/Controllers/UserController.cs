@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TaskAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace TaskAPI.Controllers
 {
@@ -19,6 +20,7 @@ namespace TaskAPI.Controllers
 
         // GET: api/user
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
         public async Task<IEnumerable<User>> GetAll()
         {
             return await _context.Users.Where(p=>p.IsDeleted != true).ToListAsync();
@@ -26,6 +28,8 @@ namespace TaskAPI.Controllers
 
         // GET api/user/sample@mail.com
         [HttpGet("{email}")]
+        [SwaggerOperation("GetAllUsers")]
+
         public async Task<User> Get(string email)
         {
             var item = await _context.Users.FirstOrDefaultAsync(x => x.EmailAddress == email && x.IsDeleted != true);
