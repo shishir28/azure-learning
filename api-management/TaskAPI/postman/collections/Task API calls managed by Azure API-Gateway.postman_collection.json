@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "a4385cb5-026c-4acf-9647-72b52256eb96",
+		"name": "Task API calls managed by Azure API",
+		"description": "HTTP Actions for Task Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Step 1: Create a new User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5cf724a1-c3d9-47b3-bd64-9d070636d248",
+						"exec": [
+							"var random = Math.random();",
+							"var emailAddress = \"test_facade\"+random*100+\"@mail.com\";",
+							"postman.setEnvironmentVariable(\"userName\", emailAddress);",
+							"postman.setEnvironmentVariable(\"userId\", undefined);",
+							"postman.setEnvironmentVariable(\"taskListId\", undefined);",
+							"postman.setEnvironmentVariable(\"taskId\", undefined);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "cb9ec73ad15747ac8eae2a5688b4bdd4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"emailAddress\":\"{{userName}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"user"
+					]
+				},
+				"description": "Creating a new user"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 2: Read a given user details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e67da39c-6553-42af-97ec-659fcdf937f3",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.environment.set(\"userId\", jsonData.userId);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{JWT-Token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/user/{{userName}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"user",
+						"{{userName}}"
+					]
+				},
+				"description": "Read User detail by providing email address. The UserId is used to create new tasklists"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 3: Create a new Task List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"{{userId}}\",\"taskListTitle\":\"New Task List please\"}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/tasklist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"tasklist"
+					]
+				},
+				"description": "Create new task list against a 'UserId'"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 4: Read Task Lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c82b599c-d096-491c-ad11-94422d24245d",
+						"exec": [
+							"pm.test(\"Read Task List Data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"     pm.environment.set(\"taskListId\", jsonData[0].taskListId);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/tasklist/{{userId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"tasklist",
+						"{{userId}}"
+					]
+				},
+				"description": "Get all tasklist for a user. TaskListId is used to read or create tasks under it"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 5: Create a new Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"taskListId\":\"{{taskListId}}\",\"taskTitle\":\"New Task\"}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/task",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"task"
+					]
+				},
+				"description": "Create a new task under a task list using 'TaskListId'"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 6: Read Tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f419666a-6e2f-419c-9c60-8101abe33904",
+						"exec": [
+							"pm.test(\"Read Task  Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.environment.set(\"taskId\", jsonData[0].taskId);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/task/{{taskListId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"task",
+						"{{taskListId}}"
+					]
+				},
+				"description": "Create a new task under a task list using 'TaskListId'"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 7: Update  a task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"taskId\":\"{{taskId}}\", \"taskListId\":\"{{taskListId}}\", \"data\":[{\"key\":\"Title\",\"value\":\"New Text\"},{\"key\":\"IsCompleted\",\"value\":\"false\"}]}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/task",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"task"
+					]
+				},
+				"description": "Update a teask using PUT method"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 8: Read Tasks after update",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/task/{{taskListId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"task",
+						"{{taskListId}}"
+					]
+				},
+				"description": "GEt the updated list"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 9: Delete a Task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"taskListId\":\"{{taskListId}}\",\"taskId\":\"{{taskId}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/task",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"task"
+					]
+				},
+				"description": "Delete a task using TaskId"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 10: Delete a Task List",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"{{userId}}\",\"taskListId\":\"{{taskListId}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/tasklist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"tasklist"
+					]
+				},
+				"description": "Delete a task list using TaskListId"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 11: Delete the user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"{{userId}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/tasks/api/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"api",
+						"user"
+					]
+				},
+				"description": "Delete the specified user"
+			},
+			"response": []
+		}
+	]
+}
