@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "0f3b8818-5d69-4145-a15a-54c5cde4580a",
+		"name": "API Management Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create API",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"serviceUrl\":\"{{web-api-url}}\",\r\n \"path\":\"{{api-id}}\",\r\n \"protocols\":[\"https\"],\r\n \"name\":\"Shishir Task API from Postman\",\r\n \"description\":\"API to creates tasks and task list\"\r\n}"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Creates an API using API management REST apis"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product (Custom)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"name\": \"Custom Product (NOT FREE)\",\r\n    \"description\": \"Custom product created using API Management REST API for demo purpose\",\r\n    \"subscriptionRequired\": true,\r\n    \"approvalRequired\": false,\r\n    \"terms\": \"\",\r\n    \"subscriptionsLimit\": null,\r\n    \"state\":\"published\"\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/products/custom?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"products",
+						"custom"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Creates a custom product"
+			},
+			"response": []
+		},
+		{
+			"name": "Add API to  product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{management-api-url}}/products/custom/apis/{{api-id}}?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"products",
+						"custom",
+						"apis",
+						"{{api-id}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Add API to a product"
+			},
+			"response": []
+		},
+		{
+			"name": "Publish Product (Custom)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"state\":\"published\"\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/products/custom?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"products",
+						"custom"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Publish a product"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User (Demo) ",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"firstName\": \"demo\",\r\n    \"lastName\": \"user\",\r\n    \"email\": \"vishwas.lele@gmail.com\",\r\n    \"password\": \"P@ssword\",\r\n    \"state\": \"active\",\r\n    \"note\": \"nothing special\"\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/users/demo?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"users",
+						"demo"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Creates a user who subscribe to the product"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Subscription (Subs)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"userId\": \"/users/demo\",\r\n    \"productId\": \"/products/custom\",\r\n    \"state\": \"active\",\r\n    \"primaryKey\": \"abcd\",\r\n    \"secondaryKey\": \"efgh\"\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/subscriptions/subs?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"subscriptions",
+						"subs"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Creates a subscription for demo user"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (CreateUser)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"create-user\",\r\n        \"method\": \"POST\",\r\n        \"urlTemplate\": \"/user\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"emailAddress\\\": \\\"saample.email@mail.com\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/create-user?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"create-user"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Create an API method to create a user entity"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (GetUser)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"get-user\",\r\n        \"method\": \"GET\",\r\n        \"urlTemplate\": \"/user/{emailAddress}\",\r\n        \"templateParameters\": [\r\n            {\r\n              \"name\": \"emailAddress\",\r\n              \"description\": \"Email address of the user.\",\r\n              \"type\": \"string\",\r\n              \"defaultValue\": \"sample@mail.com\",\r\n              \"required\": true,\r\n              \"values\": [\r\n                \"sample@mail.com\"\r\n              ]\r\n            }],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"emailAddress\\\": \\\"saample.email@mail.com\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/get-user?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"get-user"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Gets user detail using an email id"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (DeleteUser)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"delete-user\",\r\n        \"method\": \"DELETE\",\r\n        \"urlTemplate\": \"/user\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"userId\\\": \\\"adfdfedfedfdf2233222d\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/delete-user?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"delete-user"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Delete a user"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (CreateTaskList)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"create-tasklist\",\r\n        \"method\": \"POST\",\r\n        \"urlTemplate\": \"/tasklist\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\":\"{\\\"userId\\\":\\\"{{userId}}\\\",\\\"taskListTitle\\\":\\\"New Task List please\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/create-tasklist?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"create-tasklist"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Create a new task list"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (GetTaskList)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"get-tasklist\",\r\n        \"method\": \"GET\",\r\n        \"urlTemplate\": \"/tasklist/{userId}\",\r\n        \"templateParameters\": [ {\r\n              \"name\": \"userId\",\r\n              \"description\": \"User Id whose tasklists is being retrieved.\",\r\n              \"type\": \"string\",\r\n              \"defaultValue\": \"ab447cd3883\",\r\n              \"required\": true,\r\n            }],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"emailAddress\\\": \\\"saample.email@mail.com\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/get-tasklist?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"get-tasklist"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Gets all task list of a user"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (DeleteTaskList)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"delete-tasklist\",\r\n        \"method\": \"DELETE\",\r\n        \"urlTemplate\": \"/tasklist\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"userId\\\":\\\"{{userId}}\\\",\\\"taskListId\\\":\\\"{{taskListId}}\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/delete-tasklist?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"delete-tasklist"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Deletes a task list"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (CreateTask)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"create-task\",\r\n        \"method\": \"POST\",\r\n        \"urlTemplate\": \"/task\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\":\"{\\\"taskListId\\\":\\\"{{taskListId}}\\\",\\\"taskTitle\\\":\\\"New Task\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/create-task?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"create-task"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Create a new task under a task list"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (GetTasks)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"get-task\",\r\n        \"method\": \"GET\",\r\n        \"urlTemplate\": \"/task/{taskListId}\",\r\n        \"templateParameters\": [ {\r\n              \"name\": \"taskListId\",\r\n              \"description\": \"TaskList Id for which tasks is being retrieved.\",\r\n              \"type\": \"string\",\r\n              \"defaultValue\": \"adb447cd3883\",\r\n              \"required\": true,\r\n            }],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": []\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/get-task?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"get-task"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Gets all tasks of a task list"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (DeleteTask)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"name\": \"delete-task\",\r\n        \"method\": \"DELETE\",\r\n        \"urlTemplate\": \"/task\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"taskListId\\\":\\\"{{taskListId}}\\\",\\\"taskId\\\":\\\"{{taskId}}\\\"}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/delete-task?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"delete-task"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Deletes a task"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation (UpdateTask)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n       \"name\": \"update-task\",\r\n        \"method\": \"PUT\",\r\n        \"urlTemplate\": \"/task\",\r\n        \"templateParameters\": [],\r\n        \"description\": \"\",\r\n        \"request\": {\r\n          \"description\": null,\r\n          \"queryParameters\": [],\r\n          \"headers\": [],\r\n          \"representations\": [\r\n            {\r\n              \"contentType\": \"application/json\",\r\n              \"sample\": \"{\\\"taskId\\\":\\\"{{taskId}}\\\", \\\"taskListId\\\":\\\"{{taskListId}}\\\", \\\"data\\\":[{\\\"key\\\":\\\"Title\\\",\\\"value\\\":\\\"New Text\\\"},{\\\"key\\\":\\\"IsCompleted\\\",\\\"value\\\":\\\"false\\\"}]}\"\r\n\r\n            }\r\n          ]\r\n        },\r\n        \"responses\": [\r\n          {\r\n            \"statusCode\": 200,\r\n            \"description\": null,\r\n            \"representations\": []\r\n          }\r\n        ]\r\n }"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/operations/update-task?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"update-task"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				},
+				"description": "Updates a task"
+			},
+			"response": []
+		}
+	]
+}
