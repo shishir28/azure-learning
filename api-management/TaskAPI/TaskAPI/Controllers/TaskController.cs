@@ -6,10 +6,13 @@ using TaskAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaskAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
+
     public class TaskController : Controller
     {
         private readonly TaskContext _context;

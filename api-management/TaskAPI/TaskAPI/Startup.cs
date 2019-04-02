@@ -8,34 +8,11 @@ using TaskAPI.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Linq;
+using Microsoft.AspNetCore.Authentication;
 
 namespace TaskAPI
 {
-    public class SwaggerOperationNameFilter : IOperationFilter
-    {
-        public void Apply(Operation operation, OperationFilterContext context)
-        {
-            operation.OperationId = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
-                .Union(context.MethodInfo.GetCustomAttributes(true))
-                .OfType<SwaggerOperationAttribute>()
-                .Select(a => a.OperationId)
-                .FirstOrDefault();
-        }
-    }
 
-    [AttributeUsage(AttributeTargets.Method)]
-    public sealed class SwaggerOperationAttribute : Attribute
-    {
-        public SwaggerOperationAttribute(string operationId)
-        {
-            OperationId = operationId;
-        }
-
-        public string OperationId { get; }
-    }
 
     public class Startup
     {
@@ -60,12 +37,18 @@ namespace TaskAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+          
+
             services.AddEntityFrameworkInMemoryDatabase()
            .AddDbContext<TaskContext>((serviceProvider, options) =>
                       options.UseInMemoryDatabase("TaskDatabase")
                              .UseInternalServiceProvider(serviceProvider));
 
+            services.AddMvc();
+            services.AddAuthentication("BasicAuthentication")
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
+            // configure DI for application services
 
             services.AddSwaggerGen(c =>
             {
@@ -104,7 +87,8 @@ namespace TaskAPI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
