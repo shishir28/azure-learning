@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using TaskAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 
 namespace TaskAPI.Controllers

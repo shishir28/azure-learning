@@ -1,483 +1,186 @@
 {
 	"info": {
-		"_postman_id": "a4385cb5-026c-4acf-9647-72b52256eb96",
-		"name": "Task API calls managed by Azure API",
-		"description": "HTTP Actions for Task Management API",
+		"_postman_id": "4a73e955-c159-468d-b07c-f5570120401c",
+		"name": "API Management Policies Application",
+		"description": "Apply policies to Task APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Step 1: Create a new User",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "5cf724a1-c3d9-47b3-bd64-9d070636d248",
-						"exec": [
-							"var random = Math.random();",
-							"var emailAddress = \"test_facade\"+random*100+\"@mail.com\";",
-							"postman.setEnvironmentVariable(\"userName\", emailAddress);",
-							"postman.setEnvironmentVariable(\"userId\", undefined);",
-							"postman.setEnvironmentVariable(\"taskListId\", undefined);",
-							"postman.setEnvironmentVariable(\"taskId\", undefined);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true",
-						"type": "text"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "cb9ec73ad15747ac8eae2a5688b4bdd4",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"emailAddress\":\"{{userName}}\"}"
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/user",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"tasks",
-						"api",
-						"user"
-					]
-				},
-				"description": "Creating a new user"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 2: Read a given user details",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "e67da39c-6553-42af-97ec-659fcdf937f3",
-						"exec": [
-							"pm.test(\"Your test name\", function () {",
-							"    var jsonData = pm.response.json();",
-							"     pm.environment.set(\"userId\", jsonData.userId);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
-					},
-					{
-						"key": "Authorization",
-						"value": "{{JWT-Token}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/user/{{userName}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"tasks",
-						"api",
-						"user",
-						"{{userName}}"
-					]
-				},
-				"description": "Read User detail by providing email address. The UserId is used to create new tasklists"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 3: Create a new Task List",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"userId\":\"{{userId}}\",\"taskListTitle\":\"New Task List please\"}"
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/tasklist",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"tasks",
-						"api",
-						"tasklist"
-					]
-				},
-				"description": "Create new task list against a 'UserId'"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 4: Read Task Lists",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c82b599c-d096-491c-ad11-94422d24245d",
-						"exec": [
-							"pm.test(\"Read Task List Data\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"     pm.environment.set(\"taskListId\", jsonData[0].taskListId);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/tasklist/{{userId}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"tasks",
-						"api",
-						"tasklist",
-						"{{userId}}"
-					]
-				},
-				"description": "Get all tasklist for a user. TaskListId is used to read or create tasks under it"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 5: Create a new Task",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"taskListId\":\"{{taskListId}}\",\"taskTitle\":\"New Task\"}"
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/task",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"tasks",
-						"api",
-						"task"
-					]
-				},
-				"description": "Create a new task under a task list using 'TaskListId'"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 6: Read Tasks",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f419666a-6e2f-419c-9c60-8101abe33904",
-						"exec": [
-							"pm.test(\"Read Task  Data\", function () {",
-							"    var jsonData = pm.response.json();",
-							"     pm.environment.set(\"taskId\", jsonData[0].taskId);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/task/{{taskListId}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"tasks",
-						"api",
-						"task",
-						"{{taskListId}}"
-					]
-				},
-				"description": "Create a new task under a task list using 'TaskListId'"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 7: Update  a task",
+			"name": "Create Policy (Quota_On_Product)",
 			"request": {
 				"method": "PUT",
 				"header": [
 					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/vnd.ms-azure-apim.policy+xml"
 					},
 					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
+						"key": "If-Match",
+						"value": "*"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"taskId\":\"{{taskId}}\", \"taskListId\":\"{{taskListId}}\", \"data\":[{\"key\":\"Title\",\"value\":\"New Text\"},{\"key\":\"IsCompleted\",\"value\":\"false\"}]}"
+					"raw": "<policies>\r\n    <inbound>\r\n        <!-- Change the quota to immediately see the effect-->\r\n        <rate-limit calls=\"5\" renewal-period=\"60\">\r\n        </rate-limit>\r\n        <quota calls=\"200\" renewal-period=\"604800\">\r\n        </quota>\r\n        <base />\r\n  </inbound>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
 				},
 				"url": {
-					"raw": "{{url}}/tasks/api/task",
+					"raw": "{{management-api-url}}/products/custom/policy?api-version={{version}}",
 					"host": [
-						"{{url}}"
+						"{{management-api-url}}"
 					],
 					"path": [
-						"tasks",
-						"api",
-						"task"
+						"products",
+						"custom",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
 					]
 				},
-				"description": "Update a teask using PUT method"
+				"description": "Creates a policy that applies Quota on number of REST calls"
 			},
 			"response": []
 		},
 		{
-			"name": "Step 8: Read Tasks after update",
+			"name": "Create Policy (JWT Security)",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [
 					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/vnd.ms-azure-apim.policy+xml"
 					},
 					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
+						"key": "If-Match",
+						"value": "*"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "<policies>\n    <inbound>\n            <validate-jwt  require-expiration-time=\"false\" header-name=\"Authorization\" >\n                 <issuer-signing-keys>\n                    <key>VGhpcyBpcyB2ZXJ5IGhhcmQgdG8gY3JhY2sgc2VjcmV0IGtleQ==</key>\n                </issuer-signing-keys>\n                <required-claims>\n                    <claim name=\"aud\" match=\"any\">\n                        <value>www.sample-task-api.com</value>\n                    </claim>\n                </required-claims>\n           </validate-jwt>\n        <base />\n    </inbound>\n    <outbound>\n        <base />\n    </outbound>\n</policies>"
 				},
 				"url": {
-					"raw": "{{url}}/tasks/api/task/{{taskListId}}",
+					"raw": "{{management-api-url}}/products/custom/policy?api-version={{version}}",
 					"host": [
-						"{{url}}"
+						"{{management-api-url}}"
 					],
 					"path": [
-						"tasks",
-						"api",
-						"task",
-						"{{taskListId}}"
+						"products",
+						"custom",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
 					]
 				},
-				"description": "GEt the updated list"
+				"description": "Creates a policy that requires JWT token in requests"
 			},
 			"response": []
 		},
 		{
-			"name": "Step 9: Delete a Task",
+			"name": "Create Policy (Transformation) ",
 			"request": {
-				"method": "DELETE",
+				"method": "PUT",
 				"header": [
 					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/vnd.ms-azure-apim.policy+xml"
 					},
 					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
+						"key": "If-Match",
+						"value": "*"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"taskListId\":\"{{taskListId}}\",\"taskId\":\"{{taskId}}\"}"
+					"raw": "<policies>\r\n    <inbound>\r\n        <base />\r\n    </inbound>\r\n    <outbound>\r\n        <base />\r\n        <json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n    </outbound>\r\n</policies>"
 				},
 				"url": {
-					"raw": "{{url}}/tasks/api/task",
+					"raw": "{{management-api-url}}//apis/{{api-id}}/operations/get-user/policy?api-version={{version}}",
 					"host": [
-						"{{url}}"
+						"{{management-api-url}}"
 					],
 					"path": [
-						"tasks",
-						"api",
-						"task"
+						"",
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"get-user",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
 					]
 				},
-				"description": "Delete a task using TaskId"
+				"description": "Creates a policy that applies transformation on response"
 			},
 			"response": []
 		},
 		{
-			"name": "Step 10: Delete a Task List",
+			"name": "Create Policy (Custom)",
 			"request": {
-				"method": "DELETE",
+				"method": "PUT",
 				"header": [
 					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/vnd.ms-azure-apim.policy+xml"
 					},
 					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
+						"key": "If-Match",
+						"value": "*"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"userId\":\"{{userId}}\",\"taskListId\":\"{{taskListId}}\"}"
+					"raw": "<policies>\r\n  <inbound>\r\n\r\n    <base />\r\n  </inbound>\r\n  <outbound>\r\n    <base />\r\n    <choose>\r\n      <when condition='@((int)context.Response.StatusCode &lt; 300)'>\r\n        <set-variable name=\"userEmailAddress\" value='@((string)(context.Response.Body.As&lt;JObject&gt;(preserveContent: true)[\"User\"]))' />\r\n        <set-variable name=\"taskLength\" value='@{\r\n            var taskObj = (JObject)context.Response.Body.As&lt;JObject&gt;(preserveContent: true)[\"Tasks\"];\r\n\t\t        var taskArray = (JArray)taskObj[\"$values\"];\r\n\t\t        return taskArray.Count;\r\n             }' />\r\n      </when>\r\n    </choose>\r\n    <choose>\r\n      <!-- Check task length in response -->\r\n      <when condition='@(((int)context.Response.StatusCode &lt; 300) &amp;&amp; ((int)context.Variables[\"taskLength\"] > 4))'>\r\n        <send-request mode=\"new\" response-variable-name=\"webhookResponse\" timeout=\"20\" ignore-error=\"true\">\r\n          <set-url>http://events.pagerduty.com/generic/2010-04-15/create_event.json</set-url>\r\n          <set-method>POST</set-method>\r\n          <set-header name=\"Content-Type\" exists-action=\"override\">\r\n            <value>application/json</value>\r\n          </set-header>\r\n          <set-header name=\"Authorization\" exists-action=\"override\">\r\n            <value>{{pager-duty-token}}</value>\r\n          </set-header>\r\n          <set-body>\r\n            {\"service_key\":\"{{pager-duty-incident-service-id}}\"\r\n            ,\"event_type\":\"trigger\",\r\n            \"description\":\"Tasks assigned: 5 or more\",\r\n            \"details\":[]\r\n            }\r\n          </set-body>\r\n        </send-request>\r\n        <choose>\r\n          <!-- Check active property in response -->\r\n          <when condition='@((bool)true)'>\r\n            <!-- Parse the response from WebHook-->\r\n            <set-variable name=\"webHookStatus\" value='@{\r\n                          var response = ((IResponse)context.Variables[\"webhookResponse\"]).Body.As&lt;JObject&gt;();\r\n                          return (string) response[\"status\"];\r\n                          }' />\r\n            <return-response>\r\n              <set-status code='@{return (int)context.Response.StatusCode;}' reason='@{return (string)context.Response.StatusReason;}' />\r\n              <set-header name=\"Content-Type\" exists-action=\"override\">\r\n                <value>application/json</value>\r\n              </set-header>\r\n              <set-body>\r\n                @{\r\n                var response = context.Response.Body.As&lt;JObject&gt;();\r\n                response.Add(\"WebHook-triggered\",(string)context.Variables[\"webHookStatus\"]);\r\n                return response.ToString();\r\n                }\r\n              </set-body>\r\n            </return-response>\r\n          </when>\r\n        </choose>\r\n      </when>\r\n\r\n    </choose>\r\n  </outbound>\r\n</policies>"
 				},
 				"url": {
-					"raw": "{{url}}/tasks/api/tasklist",
+					"raw": "{{management-api-url}}//apis/{{api-id}}/operations/create-task/policy?api-version={{version}}",
 					"host": [
-						"{{url}}"
+						"{{management-api-url}}"
 					],
 					"path": [
-						"tasks",
-						"api",
-						"tasklist"
-					]
-				},
-				"description": "Delete a task list using TaskListId"
-			},
-			"response": []
-		},
-		{
-			"name": "Step 11: Delete the user",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Ocp-Apim-Trace",
-						"value": "true"
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Key}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"userId\":\"{{userId}}\"}"
-				},
-				"url": {
-					"raw": "{{url}}/tasks/api/user",
-					"host": [
-						"{{url}}"
+						"",
+						"apis",
+						"{{api-id}}",
+						"operations",
+						"create-task",
+						"policy"
 					],
-					"path": [
-						"tasks",
-						"api",
-						"user"
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
 					]
 				},
-				"description": "Delete the specified user"
+				"description": "Creates a custom policy"
 			},
 			"response": []
 		}

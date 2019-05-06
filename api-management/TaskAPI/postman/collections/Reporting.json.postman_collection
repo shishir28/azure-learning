@@ -1,0 +1,71 @@
+{
+	"id": "c3e8351e-70c4-2fa7-8b96-02c261c3148c",
+	"name": "Reporting",
+	"description": "Reporting on how the API was used",
+	"order": [
+		"570dacd8-c72c-320c-3cbc-11c350847004",
+		"1bc4e733-2329-a534-a13b-c531df05d393",
+		"38ace987-08cb-80ab-311c-456e76c64c32"
+	],
+	"folders": [],
+	"timestamp": 1454412016709,
+	"owner": 0,
+	"public": false,
+	"hasRequests": true,
+	"requests": [
+		{
+			"id": "1bc4e733-2329-a534-a13b-c531df05d393",
+			"headers": "Accept: text/csv\nAuthorization: {{authorization-token}}\n",
+			"url": "{{management-api-url}}/reports/byUser?$filter=(userId eq 'users/demo')and (timestamp ge datetime'2015-10-07T00:00:00')&api-version={{version}}",
+			"preRequestScript": "var random = Math.random();\nvar emailAddress = \"lav\"+random*100+\"@mail.com\";\npostman.setEnvironmentVariable(\"userName\", emailAddress);\npostman.setEnvironmentVariable(\"userId\", undefined);\npostman.setEnvironmentVariable(\"taskListId\", undefined);\npostman.setEnvironmentVariable(\"taskId\", undefined);",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454431581002,
+			"name": "Report By User",
+			"description": "Reporting by User",
+			"collectionId": "c3e8351e-70c4-2fa7-8b96-02c261c3148c"
+		},
+		{
+			"id": "38ace987-08cb-80ab-311c-456e76c64c32",
+			"headers": "Accept: application/json\nAuthorization: {{authorization-token}}\n",
+			"url": "{{management-api-url}}/reports/byOperation?$filter=operationId eq 'create-user' and apiId eq 'tasks' and timestamp ge datetime'2015-10-07T00:00:00'&api-version={{version}}",
+			"preRequestScript": "var random = Math.random();\nvar emailAddress = \"lav\"+random*100+\"@mail.com\";\npostman.setEnvironmentVariable(\"userName\", emailAddress);\npostman.setEnvironmentVariable(\"userId\", undefined);\npostman.setEnvironmentVariable(\"taskListId\", undefined);\npostman.setEnvironmentVariable(\"taskId\", undefined);",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454433757058,
+			"name": "Report By Operation",
+			"description": "Reporting by Operation",
+			"collectionId": "c3e8351e-70c4-2fa7-8b96-02c261c3148c"
+		},
+		{
+			"id": "570dacd8-c72c-320c-3cbc-11c350847004",
+			"headers": "Accept: application/json\nAuthorization: {{authorization-token}}\n",
+			"url": "{{management-api-url}}/reports/byGeo?$filter=timestamp ge datetime'2014-10-07T00:00:00'&api-version={{version}}",
+			"preRequestScript": "var random = Math.random();\nvar emailAddress = \"lav\"+random*100+\"@mail.com\";\npostman.setEnvironmentVariable(\"userName\", emailAddress);\npostman.setEnvironmentVariable(\"userId\", undefined);\npostman.setEnvironmentVariable(\"taskListId\", undefined);\npostman.setEnvironmentVariable(\"taskId\", undefined);",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454431579249,
+			"name": "Report By Location",
+			"description": "Reporting by Location",
+			"collectionId": "c3e8351e-70c4-2fa7-8b96-02c261c3148c"
+		}
+	]
+}

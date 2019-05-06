@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "6e4fb0da-fdea-47e7-8cd3-55f5bdf01c73",
+		"name": "Create Basic Auth and Cert Policies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET authentication-basic",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{management-api-url}}//apis/{{api-id}}/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"",
+						"apis",
+						"{{api-id}}",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT authentication-basic",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<policies>\r\n    <inbound>\r\n        <authentication-basic username=\"testuser\" password=\"testuser\" />\r\n        <base />\r\n    </inbound>\r\n    <backend>\r\n        <base />\r\n    </backend>\r\n    <outbound>\r\n        <base />\r\n    </outbound>\r\n</policies>"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/apis/{{api-id}}/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"",
+						"apis",
+						"{{api-id}}",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL authentication-basic",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<policies>\r\n    <inbound>\r\n        <authentication-basic username=\"testuser\" password=\"p@ssaword\" />\r\n        <base />\r\n    </inbound>\r\n    <backend>\r\n        <base />\r\n    </backend>\r\n    <outbound>\r\n        <base />\r\n    </outbound>\r\n</policies>"
+				},
+				"url": {
+					"raw": "{{management-api-url}}//apis/{{api-id}}/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"",
+						"apis",
+						"{{api-id}}",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT authentication-certificate",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<policies>\r\n\t<inbound>\r\n\t\t<authentication-certificate thumbprint=\"C2A4DE7265A91949E7BFE5334FD1152318B17D76\" />\r\n\t\t<base />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n</policies>"
+				},
+				"url": {
+					"raw": "{{management-api-url}}//apis/{{api-id}}/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"",
+						"apis",
+						"{{api-id}}",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET authentication-certificate",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{management-api-url}}//apis/{{api-id}}/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"",
+						"apis",
+						"{{api-id}}",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL authentication-certificate",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<policies>\r\n\t<inbound>\r\n\t\t<authentication-certificate thumbprint=\"C2A4DE7265A91949E7BFE5334FD1152318B17D76\" />\r\n\t\t<base />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n</policies>"
+				},
+				"url": {
+					"raw": "{{management-api-url}}//apis/{{api-id}}/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"",
+						"apis",
+						"{{api-id}}",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

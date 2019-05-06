@@ -1,0 +1,59 @@
+{
+	"id": "025a099a-2aea-18d9-bc26-869d0efbe113",
+	"name": "Update backendURL",
+	"description": "",
+	"order": [
+		"43f8c31b-545f-5f88-df59-b3367b993365",
+		"3e5d1ad3-6ca0-56a2-2268-0cf2b27a50f4"
+	],
+	"folders": [],
+	"timestamp": 1466943285560,
+	"owner": "696077",
+	"remoteLink": "",
+	"public": false,
+	"published": false,
+	"requests": [
+		{
+			"id": "3e5d1ad3-6ca0-56a2-2268-0cf2b27a50f4",
+			"headers": "Authorization: {{authorization-token}}\nContent-Type: application/json\nIf-Match: *\n",
+			"url": "{{management-api-url}}/apis/{{api-id}}?api-version={{version}}",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "025a099a-2aea-18d9-bc26-869d0efbe113",
+			"data": [],
+			"dataMode": "raw",
+			"name": "GET API",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1466943303755,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n \"serviceUrl\":\"{{web-api-url}}\",\r\n \"path\":\"{{api-id}}\",\r\n \"protocols\":[\"https\"],\r\n \"name\":\"Task API (With Basic Authentication)\",\r\n \"description\":\"API to creates tasks and task list\"\r\n}"
+		},
+		{
+			"id": "43f8c31b-545f-5f88-df59-b3367b993365",
+			"headers": "Authorization: {{authorization-token}}\nContent-Type: application/json\nIf-Match: *\n",
+			"url": "{{management-api-url}}/apis/{{api-id}}?api-version={{version}}",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "PATCH",
+			"collectionId": "025a099a-2aea-18d9-bc26-869d0efbe113",
+			"data": [],
+			"dataMode": "raw",
+			"name": "PATCH API",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1466943285559,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n \"serviceUrl\":\"{{web-api-url}}\",\r\n \"path\":\"{{api-id}}\",\r\n \"protocols\":[\"https\"],\r\n \"name\":\"Task API (With Basic Authentication)\",\r\n \"description\":\"API to creates tasks and task list\"\r\n}"
+		}
+	]
+}

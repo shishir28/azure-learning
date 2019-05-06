@@ -1,0 +1,18 @@
+<policies>
+	<inbound>
+		<validate-jwt require-expiration-time="false" header-name="Authorization">
+			<issuer-signing-keys>
+				<key>VGhpc3Nzb21lc2VjcmV0a2V5Zm9yd2hpY2hpc2hhcmQ=</key>
+			</issuer-signing-keys>
+			<required-claims>
+				<claim name="aud" match="any">
+					<value>www.sample-task-api.com</value>
+				</claim>
+			</required-claims>
+		</validate-jwt>
+		<base />
+	</inbound>
+	<outbound>
+		<base />
+	</outbound>
+</policies>

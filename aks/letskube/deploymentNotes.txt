@@ -45,3 +45,6 @@ az aks create --name shishirletskubeakscluster --resource-group  shishirletskube
  push docker image:  docker push shishirletskubeacr.azurecr.io/shishirletskubeacr:v2
  kubectl apply -f .\letskubedeploy.yml
  AND IT WORKS :-) 
+
+
+ az group delete -n shishirletskuberg -y

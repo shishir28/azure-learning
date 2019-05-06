@@ -1,0 +1,16 @@
+[
+	{
+		"key": "echo_digest_realm",
+		"value": "Users",
+		"type": "text",
+		"name": "echo_digest_realm",
+		"enabled": true
+	},
+	{
+		"key": "echo_digest_nonce",
+		"value": "zVp00RHQf9UZc7nlpnW6W4XqziV7yazN",
+		"type": "text",
+		"name": "echo_digest_nonce",
+		"enabled": true
+	}
+]

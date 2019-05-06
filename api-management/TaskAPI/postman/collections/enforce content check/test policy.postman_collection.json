@@ -1,0 +1,35 @@
+{
+	"id": "6842a950-2200-3fbb-e180-5cee1f3b822b",
+	"name": "test policy json content",
+	"description": "",
+	"order": [
+		"3e9e0767-8645-2292-653f-09be96173a08"
+	],
+	"folders": [],
+	"timestamp": 1455623704562,
+	"owner": "696077",
+	"remoteLink": "",
+	"public": false,
+	"published": false,
+	"requests": [
+		{
+			"id": "3e9e0767-8645-2292-653f-09be96173a08",
+			"headers": "Content-Type: application/json\nOcp-Apim-Trace: true\nOcp-Apim-Subscription-Key: {{Ocp-Apim-Key}}\n",
+			"url": "{{url}}/tasks/user",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1466068328876,
+			"name": "Max Content Length",
+			"description": "Validate JSON Threat for properties count",
+			"collectionId": "6842a950-2200-3fbb-e180-5cee1f3b822b",
+			"rawModeData": "{\n    \t\"array\": [\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\"],\n    \t\"object\":{\"body\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac est sit amet nisi dignissim placerat ac efficitur nisi. Donec convallis iaculis leo, vestibulum vulputate ex congue eu. Nullam quis turpis sodales, luctus enim tempus, feugiat purus. Suspendisse tincidunt mauris a mollis convallis. Donec sed consequat lectus, ac congue nibh. Ut auctor sagittis nunc nec tempus. Mauris iaculis risus nec tellus posuere, vitae ultricies dui maximus. Etiam consequat turpis lacus, sed pulvinar ipsum facilisis nec. Proin nec luctus ipsum. Nulla facilisi. Fusce sagittis metus augue, et convallis lorem sagittis a. Nullam convallis risus sit amet est euismod imperdiet. In aliquam nulla ac lectus faucibus aliquam. Nullam nec commodo turpis. Phasellus lacinia, eros sed scelerisque posuere, nisl augue tempus justo, quis porttitor elit est eu augue. Suspendisse potenti.Curabitur vehicula leo lacus, a iaculis sem finibus at. Donec eget ex id erat eleifend aliquet. Donec eget ornare felis, vel blandit lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut elementum velit eu erat accumsan sagittis. Quisque pretium ligula nunc, quis laoreet sem vehicula ut. Duis maximus dui in nisl ullamcorper, rhoncus lacinia magna feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed ullamcorper augue eros, et bibendum ligula molestie quis.Nam congue odio vitae odio imperdiet, efficitur rutrum nisi ultricies. Pellentesque feugiat condimentum elit. Sed finibus nec lectus in maximus. Pellentesque auctor nisi nisi, eget interdum odio posuere nec. Duis nec quam blandit nisi tempus molestie. Vivamus ac felis pulvinar, volutpat ex porta, accumsan velit. Integer non dui vitae mi condimentum finibus ac non arcu. Aliquam sit amet libero fringilla, porttitor felis vitae, facilisis ex. Fusce varius arcu lorem. Nam lobortis luctus maximus. Vestibulum molestie pulvinar maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam gravida tortor eget eros rhoncus tincidunt.Sed malesuada leo non semper scelerisque. Donec neque mi, aliquet vitae auctor a, auctor a risus. Praesent pharetra leo a dapibus mollis. In suscipit dignissim ultrices. Suspendisse potenti. Etiam ut ultricies orci, quis placerat sem. Sed molestie, leo ac tristique fringilla, mauris sem elementum quam, non convallis odio ipsum eget risus. Fusce nec eros non magna varius venenatis. Mauris sed justo in ex lacinia ultrices ac id arcu. Quisque ut purus orci. In aliquam lectus lorem, a sodales est pulvinar in. Proin et arcu porttitor, suscipit felis vitae, lacinia mauris. Donec id mattis erat, vel consectetur ante. Aliquam eu pellentesque arcu.Integer feugiat commodo diam, et luctus nunc ultricies et. Aliquam consequat at metus vitae sagittis. Cras id dolor eu libero congue congue. Donec sollicitudin libero eu urna mollis finibus. Cras porta diam ultricies velit accumsan, sed mollis dolor placerat. Nulla semper ipsum in mi finibus, eu suscipit est gravida. Donec placerat elementum felis, nec vulputate arcu cursus eu. Nullam orci erat, imperdiet in porttitor sit amet, sodales vel nisi. Integer tristique at nibh vulputate porttitor. Proin at massa pulvinar, placerat dui ut, varius dui. Ut viverra tellus arcu, vitae venenatis tortor condimentum vel. Donec at libero facilisis, mattis nisl eget, aliquam felis. In ut tortor velit. Integer pellentesque erat sed sem vulputate, vitae fringilla nibh feugiat. Sed sit amet erat lacinia, sagittis nunc nec, malesuada enim.Quisque elementum orci sapien, id malesuada ligula sagittis eu. Pellentesque facilisis iaculis velit sit amet fringilla. Praesent ut viverra nunc, non fermentum massa. Quisque leo quam, pulvinar quis scelerisque lobortis, hendrerit eu felis. Curabitur consectetur posuere efficitur. Sed nibh lorem, consequat vel gravida id, consequat a quam. Sed sed mi nulla. Proin tristique, sapien id finibus ultricies, tortor enim finibus velit, interdum facilisis ligula mi sed quam. Suspendisse potenti. Fusce feugiat erat justo, ac gravida nisi orci aliquam.\"}\n}"
+		}
+	]
+}

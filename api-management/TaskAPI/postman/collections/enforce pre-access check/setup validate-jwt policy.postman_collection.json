@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "8cb36c48-28f3-4f8e-882c-3170b86e0572",
+		"name": "setup validate-jwt policy",
+		"description": "PUT DEL GET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET validate-jwt policy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{management-api-url}}/products/custom/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"products",
+						"custom",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE validate-jwt policy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<policies>\n    <inbound>\n            <validate-jwt  require-expiration-time=\"false\" header-name=\"Authorization\" >\n                 <issuer-signing-keys>\n                    <key>VGhpc3Nzb21lc2VjcmV0a2V5Zm9yd2hpY2hpc2hhcmQ=</key>\n                </issuer-signing-keys>\n                <required-claims>\n                    <claim name=\"aud\" match=\"any\">\n                        <value>www.sample-task-api.com</value>\n                    </claim>\n                </required-claims>\n           </validate-jwt>\n        <base />\n    </inbound>\n    <outbound>\n        <base />\n    </outbound>\n</policies>"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/products/custom/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"products",
+						"custom",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT validate-jwt",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.ms-azure-apim.policy+xml"
+					},
+					{
+						"key": "If-Match",
+						"value": "*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<policies>\n    <inbound>\n            <validate-jwt  require-expiration-time=\"false\" header-name=\"Authorization\" >\n                 <issuer-signing-keys>\n                    <key>VGhpc3Nzb21lc2VjcmV0a2V5Zm9yd2hpY2hpc2hhcmQ=</key>\n                </issuer-signing-keys>\n                <required-claims>\n                    <claim name=\"aud\" match=\"any\">\n                        <value>www.sample-task-api.com</value>\n                    </claim>\n                </required-claims>\n           </validate-jwt>\n        <base />\n    </inbound>\n    <outbound>\n        <base />\n    </outbound>\n</policies>"
+				},
+				"url": {
+					"raw": "{{management-api-url}}/products/custom/policy?api-version={{version}}",
+					"host": [
+						"{{management-api-url}}"
+					],
+					"path": [
+						"products",
+						"custom",
+						"policy"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

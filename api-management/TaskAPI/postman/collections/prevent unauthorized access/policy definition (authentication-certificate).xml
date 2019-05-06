@@ -1,0 +1,12 @@
+<policies>
+	<inbound>
+		<authentication-certificate thumbprint="C2A4DE7265A91949E7BFE5334FD1152318B17D76" />
+		<base />
+	</inbound>
+	<backend>
+		<base />
+	</backend>
+	<outbound>
+		<base />
+	</outbound>
+</policies>

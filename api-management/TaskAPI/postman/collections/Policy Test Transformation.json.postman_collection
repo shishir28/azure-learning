@@ -1,0 +1,53 @@
+{
+	"id": "65848f5f-cb29-05d8-cab4-f62a59d037e2",
+	"name": "Policy Test: Transformation",
+	"description": "HTTP Actions to test Transformation policy",
+	"order": [
+		"a8c5e1d1-2dd8-0c1d-63e5-5f5659a6b52a",
+		"509fd67f-b529-8e37-6046-839da78e259e"
+	],
+	"folders": [],
+	"timestamp": 1454349890451,
+	"owner": 0,
+	"public": false,
+	"hasRequests": true,
+	"requests": [
+		{
+			"id": "509fd67f-b529-8e37-6046-839da78e259e",
+			"headers": "Ocp-Apim-Trace: true\nOcp-Apim-Subscription-Key: {{Ocp-Apim-Key}}\nAuthorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuc2FtcGxlLXRhc2stYXBpLmNvbSIsInN1YiI6IjEyMzQ1Njc4OTAiLCJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.bEseQuNDAGk7wCtP197BwJEXd7JFxa8--wX95sLvjdY\n",
+			"url": "{{url}}/tasks/user/{{userName}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data  ={};\n\ndata = xml2Json(responseBody);\n\npostman.setEnvironmentVariable(\"userId\", data.Document.UserId);\n\nconsole.log(data.UserId);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454350298473,
+			"name": "Step 2: Read a user detail",
+			"description": "Read User detail by providing email address. The UserId is used to create new tasklists",
+			"collectionId": "65848f5f-cb29-05d8-cab4-f62a59d037e2"
+		},
+		{
+			"id": "a8c5e1d1-2dd8-0c1d-63e5-5f5659a6b52a",
+			"headers": "Content-Type: application/json\nOcp-Apim-Trace: true\nOcp-Apim-Subscription-Key: {{Ocp-Apim-Key}}\n",
+			"url": "{{url}}/tasks/user",
+			"preRequestScript": "var random = Math.random();\nvar emailAddress = \"test_transform\"+random*100+\"@mail.com\";\npostman.setEnvironmentVariable(\"userName\", emailAddress);\npostman.setEnvironmentVariable(\"userId\", undefined);\npostman.setEnvironmentVariable(\"taskListId\", undefined);\npostman.setEnvironmentVariable(\"taskId\", undefined);",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454997006854,
+			"name": "Step 1: Create a new User",
+			"description": "Creating a new user",
+			"collectionId": "65848f5f-cb29-05d8-cab4-f62a59d037e2",
+			"rawModeData": "{\"emailAddress\":\"{{userName}}\"}"
+		}
+	]
+}

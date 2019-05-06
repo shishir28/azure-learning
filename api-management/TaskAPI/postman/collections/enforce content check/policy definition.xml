@@ -1,0 +1,21 @@
+<policies>
+  <inbound>
+    
+    <set-variable name="contentAsString" value='@((string)context.Request.Body.As&lt;String&gt;(preserveContent: true))' />
+    <set-variable name="ALLOWED_CONTENT_LENGTH" value='@{return 4096;}' />
+    
+    <choose>
+        <when condition='@(((string)context.Variables["contentAsString"]).Length &gt;=  ((int)context.Variables["ALLOWED_CONTENT_LENGTH"]))'>
+            <set-variable name="endTimeTicks" value='@{ return DateTime.UtcNow.Ticks;}' />
+            <return-response >
+                <set-status code="400" reason='@{ return "JSON ERROR: Content length is greater than the permissible limit of: " + (int)context.Variables["ALLOWED_CONTENT_LENGTH"] + " byte(s)"; }' />
+            </return-response>
+        </when>       
+    </choose>                  
+   
+    <base />
+  </inbound>
+  <outbound>
+    <base />
+  </outbound>
+</policies>
