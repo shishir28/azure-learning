@@ -138,7 +138,7 @@ namespace VideoProcessor
           [OrchestrationTrigger] DurableOrchestrationContext ctx,
           ILogger log)
         {
-       
+
             var timesRun = ctx.GetInput<int>();
             timesRun++;
             if (!ctx.IsReplaying)

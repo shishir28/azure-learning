@@ -17,8 +17,8 @@ namespace AZSearchService
             var searchParameters = new SearchParameters
             {
                 Select = new[] { "*" }
-
             };
+            
             var searchTerm = "NCT00000102.txt";
 
             var searchResult = indexClient.Documents.Search(searchTerm, searchParameters);

@@ -11,27 +11,27 @@ namespace AZStorageSample
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main (string[] args)
         {
-            var serviceProvider = Program.Intitialize();
-            var appSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>>();
-            // StorageAccountSample.Invoke(appSettings.Value.ConnectionStrings);
+            var serviceProvider = Program.Intitialize ();
+            var appSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>> ();
+            StorageAccountSample.Invoke (appSettings.Value.ConnectionStrings);
             // AzureTableSample.Invoke(appSettings.Value.ConnectionStrings);
-            CosmosDBSample.Invoke(appSettings.Value);
-            Console.WriteLine("Press any key to terminate ...");
-            Console.ReadKey();
+            CosmosDBSample.Invoke (appSettings.Value);
+            Console.WriteLine ("Press any key to terminate ...");
+            Console.ReadKey ();
         }
 
-        private static IServiceProvider Intitialize()
+        private static IServiceProvider Intitialize ()
         {
-            var services = new ServiceCollection();
-            var builder = new ConfigurationBuilder()
-                 .AddJsonFile("appsettings.json");
+            var services = new ServiceCollection ();
+            var builder = new ConfigurationBuilder ()
+                .AddJsonFile ("appsettings.json");
 
-            var configuration = builder.Build();
-            services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
+            var configuration = builder.Build ();
+            services.Configure<AppSettings> (configuration.GetSection ("AppSettings"));
 
-            return services.BuildServiceProvider();
+            return services.BuildServiceProvider ();
         }
     }
 }

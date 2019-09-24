@@ -49,3 +49,4 @@ bld/
 src/**/package-lock.json
 src/**/dist/
 launchSettings.json
+appsettings.Development.json
