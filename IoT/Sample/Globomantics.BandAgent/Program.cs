@@ -23,7 +23,6 @@ namespace Globomantics.BandAgent
             twinProperties["connectionType"] = "wi-fi";
             twinProperties["connectionStrength"] = "weak";
             await device.UpdateReportedPropertiesAsync(twinProperties);
-
              
             // while(true) 
             // {
