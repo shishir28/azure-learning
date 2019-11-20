@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moand-IoT.Common", "Moand-IoT.Common\Moand-IoT.Common.csproj", "{5DEEA0E0-2EB3-492E-996A-5679941DEC40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moand-IoT.Simulator", "Moand-IoT.Simulator\Moand-IoT.Simulator.csproj", "{4F913B27-DFFC-43F5-9B2F-156C8125D7F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moand-IoT.ListnerFunctionApp", "Moand-IoT.ListnerFunctionApp\Moand-IoT.ListnerFunctionApp.csproj", "{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moand-IoT.MessageProcessor", "Moand-IoT.MessageProcessor\Moand-IoT.MessageProcessor.csproj", "{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DEEA0E0-2EB3-492E-996A-5679941DEC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DEEA0E0-2EB3-492E-996A-5679941DEC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DEEA0E0-2EB3-492E-996A-5679941DEC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DEEA0E0-2EB3-492E-996A-5679941DEC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F913B27-DFFC-43F5-9B2F-156C8125D7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F913B27-DFFC-43F5-9B2F-156C8125D7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F913B27-DFFC-43F5-9B2F-156C8125D7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F913B27-DFFC-43F5-9B2F-156C8125D7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40636808-97E3-4D1A-B862-CFBCD3274676}
+	EndGlobalSection
+EndGlobal
