@@ -42,6 +42,8 @@ namespace Monad.Eventhubs.RealTimeAnalyzerApp
         public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
         {
 
+            Console.WriteLine($"..........................New Batch arrived...........................");
+
             var telemetryData = messages.Select(x =>
             {
                 var data = Encoding.UTF8.GetString(x.Body.Array);
@@ -51,9 +53,14 @@ namespace Monad.Eventhubs.RealTimeAnalyzerApp
             _cache.AddRange(telemetryData);
 
             var switchedOnDeviceCount = _cache.Count(x => x.IsOn);
-            Console.WriteLine($"Out of {_cache.Count}, Total number of ON devices are {switchedOnDeviceCount}");
+            //Console.WriteLine($"Out of {_cache.Count}, Total number of ON devices are {switchedOnDeviceCount}");
+            foreach (var item in telemetryData)
+            {
+                Console.WriteLine($"{item.IpAddress} Time: { item.Time} and DeviceType {item.DeviceType} IsOn { item.IsOn}");
+            }
 
-            if (_checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
+
+            if (_checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(1))
             {
                 await context.CheckpointAsync();
                 _checkpointStopWatch.Restart();

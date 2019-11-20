@@ -1,4 +1,4 @@
-﻿az login
+﻿az login --use-device-code
 
 
 $resourceGroup = "MonadEventhubRG"

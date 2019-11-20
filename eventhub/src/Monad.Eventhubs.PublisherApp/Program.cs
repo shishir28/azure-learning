@@ -21,7 +21,7 @@ namespace Monad.Eventhubs.PublisherApp
             publisher.Init(appSettings.PublisherConnectionStrings);
 
             var random = new Random(Environment.TickCount);
-            const int numEvents = 1000;
+            const int numEvents = 5;
 
 
             for (var i = 0; i < numEvents; i++)
@@ -29,6 +29,8 @@ namespace Monad.Eventhubs.PublisherApp
                 var deviceTelemetry = DeviceTelemetry.GenerateRandom(random);
                 publisher.PublishAsync(deviceTelemetry).GetAwaiter().GetResult();
                 Console.WriteLine($"Published {i + 1} events...");
+                Console.WriteLine($"{deviceTelemetry.IpAddress}  events...");
+
             }
 
             Console.WriteLine("Press any key to terminate the application");

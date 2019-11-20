@@ -18,7 +18,7 @@ namespace Monad.Eventhubs.DataPersistenceApp
 
             // consumer code                        
             var eventProcessorHost = new EventProcessorHost(appSettings.EventHubName,
-                    PartitionReceiver.DefaultConsumerGroupName, appSettings.EventHubConnectionStrings, storageConnectionString, appSettings.StorageAccounName);
+                    "faster", appSettings.EventHubConnectionStrings, storageConnectionString, appSettings.StorageAccounName);
             var options = new EventProcessorOptions();
             options.SetExceptionHandler((x) => { Console.WriteLine(x.Exception); });
             // register the event host 

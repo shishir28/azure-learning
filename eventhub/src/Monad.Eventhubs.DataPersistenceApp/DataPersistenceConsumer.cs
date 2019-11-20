@@ -26,7 +26,7 @@ namespace Monad.Eventhubs.DataPersistenceApp
 
         public async Task CloseAsync(PartitionContext context, CloseReason reason)
         {
-            Console.WriteLine($"Releasing lease on partion {context.Lease.PartitionId}  for reason {reason}");
+            Console.WriteLine($"Releasing lease on Partition {context.Lease.PartitionId}  for reason {reason}");
 
             if (reason == CloseReason.Shutdown)
                 await context.CheckpointAsync();
@@ -51,6 +51,7 @@ namespace Monad.Eventhubs.DataPersistenceApp
 
         public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
         {
+            Console.WriteLine($"..........................New Batch arrived...........................");
 
             var telemetryDataCollection = messages.Select(x =>
             {
@@ -64,9 +65,11 @@ namespace Monad.Eventhubs.DataPersistenceApp
                 await sqlConnection.OpenAsync();
                 var query = @"INSERT INTO [DeviceTelemetry] ([IPAddress],[Time],[DeviceType],[IsOn]) VALUES (@IPAddress, @Time, @DeviceType, @IsOn)";
 
-                foreach (var tetelemetryData in telemetryDataCollection)
+                foreach (DeviceTelemetry tetelemetryData in telemetryDataCollection)
                 {
-                    using (var sqlCommand = new SqlCommand(query, sqlConnection))
+                    Console.WriteLine($"{tetelemetryData.IpAddress} Time: { tetelemetryData.Time} and DeviceType {tetelemetryData.DeviceType} IsOn { tetelemetryData.IsOn}");
+
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
                         sqlCommand.Parameters.AddWithValue("@IPAddress", tetelemetryData.IpAddress);
                         sqlCommand.Parameters.AddWithValue("@Time", tetelemetryData.Time);
@@ -77,7 +80,7 @@ namespace Monad.Eventhubs.DataPersistenceApp
                 }
             }
 
-            if (_checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
+            if (_checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(1))
             {
                 await context.CheckpointAsync();
                 _checkpointStopWatch.Restart();

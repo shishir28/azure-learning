@@ -25,7 +25,7 @@ namespace Monad.Eventhubs.Core
                 IpAddress = GenerateRandomIpAddress(random),
                 DeviceType = GenerateRandomDevice(random),
                 Time = DateTime.UtcNow,
-                IsOn = random.Next(0, 2).Equals(1)
+                IsOn = true// random.Next(0, 2).Equals(1)
             };
         }
 
