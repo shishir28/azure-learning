@@ -9,8 +9,17 @@ using System.Threading.Tasks;
 
 namespace Moand_IoT.MessageProcessor
 {
-   public class CustomMessageProcessor : IEventProcessor
+    public class CustomMessageProcessor : IEventProcessor
     {
+        private AppSettings _appSettings;
+        private AnotherSimulator _anotherSimulator;
+
+
+        public CustomMessageProcessor(AppSettings appSettings)
+        {
+            _appSettings = appSettings;
+        }
+
         public Task OpenAsync(PartitionContext context)
         {
             Console.WriteLine("LoggingEventProcessor opened, processing partition: " +
@@ -32,7 +41,7 @@ namespace Moand_IoT.MessageProcessor
             return Task.CompletedTask;
         }
 
-        
+
 
         private void SendFirstRespondersTo(decimal latitude, decimal longitude)
         {
@@ -63,8 +72,22 @@ namespace Moand_IoT.MessageProcessor
                     Console.WriteLine($"Guest requires emergency assistance! Device ID: {deviceId}");
                     SendFirstRespondersTo(telemetry.Latitude, telemetry.Longitude);
                 }
+                this.CopyTheMessageToAnotherIoTHub(telemetry);
             }
             return context.CheckpointAsync();
+        }
+
+        private void CopyTheMessageToAnotherIoTHub(Telemetry telemetry)
+        {
+            this.CreateSimulatorIfNotStarted();
+            _anotherSimulator.SendMessage(telemetry);
+        }
+
+        private void CreateSimulatorIfNotStarted()
+        {
+            if (_anotherSimulator == null)
+                _anotherSimulator = new AnotherSimulator(this._appSettings.AnotherIoTHubConnectionString);
+            
         }
     }
 }

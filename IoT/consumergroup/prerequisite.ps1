@@ -4,6 +4,7 @@
 $resourceGroup = "Monad-IoT-Hub-RG"
 $location = "australiaeast"
 $iotHubName = "monad-iot-hub"
+$anotheriotHubName = "monad-another-iot-hub"
 $storageSKU = "Standard_RAGRS"
 $storageAccName = "monadiothubstrg" 
 $device_container = "device-ids"
@@ -11,9 +12,9 @@ $dbServer = "monadiothubdbserver"
 $dbName = "monadiothubdb"
 
 $firewallRule="OfficeIP"
+
 $firewallStartIpAddress="00.000.000.000"
 $firewallEndIpAddress="00.000.000.255"
-
 $dbAdminPassword = "Test1234#"
 $dbAdminUser = "sqladmin"
 
@@ -30,6 +31,9 @@ az storage container create --account-name $storageAccName --account-key $storag
 # create iot hub
 
 az iot hub create  --resource-group $resourceGroup  --name $iotHubName
+
+az iot hub create  --resource-group $resourceGroup  --name $iotHub2Name
+
 
 # create a DB Server
 

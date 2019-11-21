@@ -8,5 +8,8 @@
         public string StorageContainerName { get; set; }
         public string ConsumerGroupName { get; set; }
 
+        public string AnotherIoTHubName { get; set; }
+        public string AnotherIoTHubConnectionString { get; set; }
+
     }
 }

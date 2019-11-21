@@ -25,15 +25,20 @@ namespace Moand_IoT.MessageProcessor
             var appSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value;
 
 
-            var processor = new EventProcessorHost( appSettings.IoTHubName,  appSettings.ConsumerGroupName, appSettings.IoTHubConnectionString,appSettings.StorageConnectionString, appSettings.StorageContainerName);
+            var processorHost = new EventProcessorHost( appSettings.IoTHubName,  
+                appSettings.ConsumerGroupName,
+                appSettings.IoTHubConnectionString,
+                appSettings.StorageConnectionString, 
+                appSettings.StorageContainerName);
 
-            await processor.RegisterEventProcessorAsync<CustomMessageProcessor>();
+           await  processorHost.RegisterEventProcessorFactoryAsync(new CustomMessageProcessorFactory(appSettings));
+
 
             Console.WriteLine("Event processor started, press enter to exit...");
 
             Console.ReadLine();
 
-            await processor.UnregisterEventProcessorAsync();
+            await processorHost.UnregisterEventProcessorAsync();
         }
 
         private static void SetupLoggingProvider(ILoggerFactory factory)

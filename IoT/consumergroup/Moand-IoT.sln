@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moand-IoT.Common", "Moand-I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moand-IoT.Simulator", "Moand-IoT.Simulator\Moand-IoT.Simulator.csproj", "{4F913B27-DFFC-43F5-9B2F-156C8125D7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moand-IoT.ListnerFunctionApp", "Moand-IoT.ListnerFunctionApp\Moand-IoT.ListnerFunctionApp.csproj", "{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moand-IoT.ListnerFunctionApp", "Moand-IoT.ListnerFunctionApp\Moand-IoT.ListnerFunctionApp.csproj", "{EDAE4E9E-F87F-4595-AFF3-A90A89B357FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moand-IoT.MessageProcessor", "Moand-IoT.MessageProcessor\Moand-IoT.MessageProcessor.csproj", "{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moand-IoT.MessageProcessor", "Moand-IoT.MessageProcessor\Moand-IoT.MessageProcessor.csproj", "{FBE2298B-54F8-4E62-839A-D6D2FF321D3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
